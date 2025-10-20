@@ -1,12 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
 @import "tailwindcss";
-@plugin "daisyui";
-@plugin "daisyui/theme" {
-  default: true;
-  --color-primary: #fbbf24;
-  --color-secondary: #0a0e27;
-  --color-accent: #60a5fa;
-  --color-background: #141b3d;
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../../node_modules/flowbite";
+@theme {
+  --color-primary: #60a5fa;
+  --color-secondary: #fbbf24;
+  --color-secondary-accent: #f59e0b;
+  --color-accent: #0a0e27;
+  --color-background: #0a0e27;
+  --color-foreground: #f5e6d3;
+  --color-muted: #1e2a5e;
+  --color-bg-accent: #141b3d;
+}
+
+@utility goldmenu {
+  @apply hover:shadow-secondary/20 hover:text-secondary hover:border-secondary;
+}
+
+@utility bluemenu {
+  @apply hover:shadow-primary/20 hover:text-primary hover:border-primary;
 }
 
 * {
@@ -139,10 +152,6 @@ p {
 
 .wave-line {
   animation: wave 20s linear infinite;
-}
-
-.role-text {
-  animation: slideHorizontal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 /* Animations Home */
