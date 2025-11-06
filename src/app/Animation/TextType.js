@@ -180,7 +180,7 @@ const TextType = ({
     showCursor && (
       <span
         ref={cursorRef}
-        className={`text-primary text-type__cursor ${cursorClassName} ${
+        className={`text-white text-type__cursor ${cursorClassName} ${
           shouldHideCursor ? "text-type__cursor--hidden" : ""
         }`}
       >

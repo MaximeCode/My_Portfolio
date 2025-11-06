@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Download, User } from "lucide-react";
+import { Eye, User } from "lucide-react";
 import TextType from "../Animation/TextType";
+import LeftColumn from "./LeftColumn";
+import Link from "next/link";
+import BtnDownloadCV from "./btn/BtnDownloadCV";
+import Btn from "./btn/Btn";
 
 export default function HeroSection() {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const text = "Maxime BAUDE";
+  const [displayCursor, setDisplayCursor] = useState(true);
 
   useEffect(() => {
     if (currentIndex < text.length) {
@@ -14,31 +19,28 @@ export default function HeroSection() {
         setCurrentIndex(currentIndex + 1);
       }, 100);
       return () => clearTimeout(timeout);
+    } else {
+      setDisplayCursor(false);
     }
   }, [currentIndex, text]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#141b3d] to-[#0a0e27] overflow-hidden">
+    <>
       <section className="container mx-auto px-6 py-20 min-h-screen flex items-center">
         <div className="w-full flex flex-col lg:flex-row gap-16 items-center">
-          {/* Left Side - Profile Photo (1/3 width) */}
-          <div className="lg:w-1/3 flex justify-center">
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#fbbf24] to-[#60a5fa] rounded-full blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-              <div className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-[#fbbf24] shadow-2xl shadow-[#fbbf24]/30 group-hover:scale-110 transition-transform duration-500">
-                <div className="w-full h-full bg-[#1e2a5e]/30 flex items-center justify-center">
-                  <User className="w-32 h-32 text-[#f5e6d3]/30" />
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <LeftColumn />
           {/* Right Side - Introduction (2/3 width) */}
           <div className="lg:w-2/3 flex flex-col gap-8">
             {/* Name - Animated */}
             <h1 className="text-[#fbbf24] text-6xl tracking-wide animate-slide-in-right">
               {displayText}
-              <span className="animate-pulse">|</span>
+              <span
+                className={`animate-pulse ${
+                  displayCursor ? "inline-block" : "hidden"
+                }`}
+              >
+                |
+              </span>
             </h1>
 
             {/* Job Title - Very Big Style with Animation */}
@@ -72,11 +74,16 @@ export default function HeroSection() {
               </p>
             </div>
 
-            {/* Download CV Button */}
-            <button className="animate-scale-in group mt-4 inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#fbbf24] to-[#60a5fa] text-[#0a0e27] font-semibold rounded-full hover:shadow-2xl hover:shadow-[#60a5fa]/50 transition-all duration-300 hover:scale-105 w-fit">
-              <Download className="w-5 h-5 group-hover:animate-bounce" />
-              <span className="text-lg">Télécharger mon CV</span>
-            </button>
+            <div className="flex gap-8">
+              {/* Voir mes réalisations */}
+              <Btn
+                icon={<Eye className="w-5 h-5 group-hover:animate-bounce" />}
+                text="Voir mes réalisations"
+                href="/mes_realisations"
+              />
+
+              <BtnDownloadCV />
+            </div>
           </div>
         </div>
       </section>
@@ -84,6 +91,6 @@ export default function HeroSection() {
       {/* Éléments décoratifs */}
       <div className="fixed top-1/4 right-0 w-96 h-96 bg-[#fbbf24]/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
       <div className="fixed bottom-1/4 left-0 w-96 h-96 bg-[#60a5fa]/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
-    </div>
+    </>
   );
 }
