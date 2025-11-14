@@ -3,6 +3,10 @@ import { WaveDivider } from "./Components/WaveDivider";
 import Script from "next/script";
 import Navbar from "./Components/Navbar";
 
+export const classNameForIcon = "w-5 h-5 group-hover:animate-bounce";
+export const ma_pdp = "/img/ma_grosse_tete.jpg";
+export const ma_grosse_tete = "/img/Photo_BAUDE_Maxime_3_ma_grosse_tete.jpg";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
@@ -18,5 +22,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
-//// RÉÉCRIRE LES TEXTES ////

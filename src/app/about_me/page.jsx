@@ -17,18 +17,19 @@ import {
   MapPin,
   GraduationCap,
   Github,
+  Eye,
   ArrowRight,
   ExternalLink,
+  Lock,
+  MailPlus,
 } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import BtnDownloadCV from "@/app/Components/btn/BtnDownloadCV";
+import Btn from "@/app/Components/btn/Btn";
+import { classNameForIcon } from "@/app/layout";
 
 export default function AboutPage() {
-  const educationRefs = {
-    2023: useRef(null),
-    2021: useRef(null),
-    2019: useRef(null),
-  };
+  const [showSchoolProjectModal, setShowSchoolProjectModal] = useState(false);
 
   const scrollToEducation = (year) => {
     const ref = educationRefs[year];
@@ -51,8 +52,8 @@ export default function AboutPage() {
     {
       icon: Github,
       label: "GitHub",
-      value: "github.com/maximebaude",
-      link: "https://github.com/maximebaude",
+      value: "github.com/MaximeCode",
+      link: "https://github.com/MaximeCode",
     },
   ];
 
@@ -66,38 +67,57 @@ export default function AboutPage() {
       link: "https://albabadminton.fr",
     },
     {
-      title: "Application Mobile Fitness",
+      title:
+        "Application pour l'évènement caritatif du lycée Fulbert : La Solirun",
       description:
-        "Création d'une application de suivi sportif avec planification d'entraînements, suivi des performances et communauté sociale.",
-      technologies: ["React Native", "Firebase", "TypeScript", "Redux"],
+        "Création d'une application pour gérer l'évènement annuel du lycée Fulbert à Chartres (28), avec une interface admin pour gérer les participants et les courses. Le tout en Next.js avec React, TailwindCSS et daisyUI, PHP et MySQL pour le back-end. Un websocket a également été implémenté pour la communication en temps réel entre l'application et l'écran géant affichant les résultats en direct à tous les élèves et professeurs. Cet application a été développée par un collègue et moi-même, et n'est pas disponible publiquement (le lycée étant le propriétaire).",
+      technologies: [
+        "Next.js",
+        "JavaScript",
+        "TailwindCSS",
+        "daisyUI",
+        "PHP",
+        "MySQL",
+      ],
       image: "minia_hp_solirun",
-      link: "https://example.com",
+      // link: "https://example.com",
     },
   ];
 
   const education = [
     {
+      year: "2028",
+      degree: "Master Architecture & Développement Logiciel",
+      school: "CODA_ School, Orléans (45)",
+      description:
+        "J'ai pour projet de devenir chef de projet web et pour cela, je prévois de poursuivre mes études vers un master orienté architecture logicielle, gestion de projet et cybersécurité.",
+    },
+    {
+      year: "2026",
+      degree: "3ème année Bachelor Développeur Full-Stack",
+      school: "CODA_ School, Orléans (45)",
+      description:
+        "En alternance chez Kiwik, avec un rythme de 3 semaines en entreprise et 1 semaine en école. Formation en Développement Web Full-Stack grâce à des intervenants expérimentés et des projets variés. Activités principales : Approfondissement de React, Node.JS, Diagrammes UML, API REST, Docker, Symfony... Passage du diplôme en juin 2026.",
+    },
+    {
+      year: "2025",
+      degree: "BTS SIO SLAM ",
+      school: "Lycée Fulbert, Chartres (28)",
+      description:
+        "Formation en développement web full-stack, comprenant Front-end, Back-end, gestion de bases de données et de serveurs (SQL, Apache, Nginx...). Activités principales : développement web avec HTML, CSS, JavaScript, PHP, MySQL, et développement application en C#. Apprentissage de la Programmation Orientée Objet et des méthodologies agiles. Diplôme obtenu et option Mathématiques Approfondies validée.",
+    },
+    {
       year: "2023",
-      degree: "Master Développement Web et Mobile",
-      school: "École Supérieure d'Informatique",
+      degree: "BAC Pro Systèmes Numériques Option C : RISC",
+      school: "Lycée Sully, Nogent-le-Rotrou (28)",
       description:
-        "Spécialisation en architecture logicielle, développement full-stack et méthodologies agiles. Projet de fin d'études sur l'optimisation des performances web.",
-    },
-    {
-      year: "2021",
-      degree: "Licence Informatique",
-      school: "Université Paris-Saclay",
-      description:
-        "Formation généraliste en informatique couvrant les fondamentaux : algorithmique, structures de données, bases de données, réseaux et développement web.",
-    },
-    {
-      year: "2019",
-      degree: "DUT Informatique",
-      school: "IUT de Paris",
-      description:
-        "Formation technique intensive en programmation orientée objet, développement web, gestion de projet et travail en équipe.",
+        "Formation aux réseaux et systèmes d'administration, et découverte de la programmation informatique. Activités principales : configuration, installation et test d'équipements réseaux tels que des switchs, des routeurs ou des serveurs ADDS, DNS, DHCP, Ipfire, GPO, VLAN... Également virtualisation de serveursavec VirtualBox et Proxmox. Diplôme obtenu avec mention Très Bien & mention Européenne.",
     },
   ];
+
+  // Prends les années de l'array education et crée un ref pour chaque année
+  const educationRefs = {};
+  education.map((edu) => (educationRefs[edu.year] = useRef(null)));
 
   return (
     <div className="min-h-screen bg-[#0a0e27] text-[#f5e6d3] pt-24 pb-16 px-4 sm:px-6 lg:px-8">
@@ -188,12 +208,16 @@ export default function AboutPage() {
                     <CardTitle className="text-[#f5e6d3] flex items-center justify-between">
                       {project.title}
                       <a
-                        href={project.link}
+                        href={project.link || "#modal_info_no_public_project"}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors"
+                        className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer"
                       >
-                        <ExternalLink className="w-5 h-5" />
+                        {project.link ? (
+                          <ExternalLink className="w-5 h-5" />
+                        ) : (
+                          <Lock className="w-5 h-5" />
+                        )}
                       </a>
                     </CardTitle>
                     <CardDescription className="text-[#f5e6d3]/70">
@@ -217,6 +241,15 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+
+          <div className="flex justify-center mt-12">
+            <Btn
+              icon={<Eye className={classNameForIcon} />}
+              text="Voir tous mes projets"
+              href="/mes_realisations"
+              size="md"
+            />
+          </div>
         </div>
 
         {/* Education Timeline */}
@@ -227,21 +260,24 @@ export default function AboutPage() {
 
           {/* Timeline Navigation */}
           <div className="flex justify-center gap-4 mb-12">
-            {Object.keys(educationRefs).map((year) => (
-              <button
-                key={year}
-                onClick={() => scrollToEducation(year)}
-                className="px-6 py-2 bg-[#141b3d] border border-[#60a5fa]/30 text-[#60a5fa] rounded-full hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24] transition-all duration-300"
-              >
-                {year}
-              </button>
-            ))}
+            {Object.keys(educationRefs)
+              .reverse()
+              .map((year) => (
+                <button
+                  type="button"
+                  key={year}
+                  onClick={() => scrollToEducation(year)}
+                  className="cursor-pointer px-6 py-2 bg-[#141b3d] border border-[#60a5fa]/30 text-[#60a5fa] rounded-full hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24] transition-all duration-300"
+                >
+                  {year}
+                </button>
+              ))}
           </div>
 
           {/* Timeline */}
-          <div className="relative max-w-4xl mx-auto">
+          <div className="relative max-w-6xl mx-auto">
             {/* Vertical Line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#60a5fa] via-[#fbbf24] to-[#60a5fa]" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 mx-auto bg-gradient-to-b from-[#60a5fa] via-[#fbbf24] to-[#60a5fa]" />
 
             {education.map((edu, index) => (
               <div
@@ -249,14 +285,14 @@ export default function AboutPage() {
                 ref={educationRefs[edu.year]}
                 className={`relative mb-12 md:mb-16 ${
                   index % 2 === 0
-                    ? "md:pr-1/2 md:text-right"
-                    : "md:pl-1/2 md:ml-auto md:text-left"
-                } pl-12 md:w-1/2`}
+                    ? "pr-12 mr-auto text-right"
+                    : "pl-12 ml-auto text-left"
+                } w-1/2`}
               >
                 {/* Timeline Dot */}
                 <div
                   className={`absolute top-0 w-4 h-4 bg-[#fbbf24] rounded-full border-4 border-[#0a0e27] ${
-                    index % 2 === 0 ? "left-0 md:-right-2" : "left-0 md:-left-2"
+                    index % 2 === 0 ? "-right-2" : "-left-2"
                   }`}
                 />
 
@@ -277,7 +313,27 @@ export default function AboutPage() {
         </div>
 
         {/* Call to Action */}
-        <div className="bg-gradient-to-r from-[#141b3d] to-[#0a0e27] rounded-2xl p-8 md:p-12 border border-[#fbbf24]/20 text-center">
+        <div className="relative bg-gradient-to-r from-[#141b3d] to-[#0a0e27] rounded-2xl p-8 md:p-12 border border-[#fbbf24]/20 text-center max-w-4xl overflow-hidden">
+          {/* Lumière 1 - Commence en haut à gauche */}
+          <div
+            className="light-1 absolute w-16 h-1.5 bg-gradient-to-r from-red-800 via-[#fbbf24] to-red-800 rounded-full shadow-2xl"
+            style={{
+              top: 0,
+              left: 0,
+              transformOrigin: "center center",
+            }}
+          />
+
+          {/* Lumière 2 - Commence en bas à droite (opposée à 180°) */}
+          <div
+            className="light-2 absolute w-16 h-1.5 bg-gradient-to-r from-red-800 via-[#fbbf24] to-red-800 rounded-full shadow-2xl"
+            style={{
+              bottom: 0,
+              right: 0,
+              transformOrigin: "center center",
+            }}
+          />
+          {/* Contenu */}
           <h3 className="text-3xl font-bold text-[#fbbf24] mb-4">
             Vous avez un projet à réaliser ?
           </h3>
@@ -288,13 +344,12 @@ export default function AboutPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <BtnDownloadCV size="md" />
-            <a
+            <Btn
+              icon={<MailPlus className={classNameForIcon} />}
               href="#contact"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-[#60a5fa] text-[#0a0e27] rounded-full hover:bg-[#fbbf24] transition-all duration-300"
-            >
-              Me contacter
-              <ArrowRight className="w-5 h-5" />
-            </a>
+              text="Me contacter"
+              size="md"
+            />
           </div>
         </div>
       </div>

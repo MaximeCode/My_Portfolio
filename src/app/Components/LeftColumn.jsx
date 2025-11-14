@@ -1,4 +1,5 @@
-import { User } from "lucide-react";
+import Image from "next/image";
+import { ma_grosse_tete } from "@/app/layout";
 
 export default function LeftColumn() {
   return (
@@ -9,7 +10,12 @@ export default function LeftColumn() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#fbbf24] to-[#60a5fa] rounded-full blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
           <div className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-[#fbbf24] shadow-2xl shadow-[#fbbf24]/30 group-hover:scale-110 transition-transform duration-500">
             <div className="w-full h-full bg-[#1e2a5e]/30 flex items-center justify-center">
-              <User className="w-32 h-32 text-[#f5e6d3]/30" />
+              <Image
+                src={ma_grosse_tete}
+                alt="Portrait de Maxime BAUDE"
+                width={320}
+                height={320}
+              />
             </div>
           </div>
         </div>

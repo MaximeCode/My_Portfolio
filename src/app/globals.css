@@ -295,3 +295,74 @@ p {
 .animate-fadeIn {
   animation: fadeInSkillsTabs 0.8s ease-out;
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e27;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #60a5fa;
+  border-radius: 10px;
+  border: 2px solid #0a0e27;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fbbf24;
+}
+
+/* Lights on About me, last section */
+/* ANIMATION SPEED - Modifier la durée ici (actuellement 20s = vitesse lente) */
+@keyframes rotate-border {
+  0% {
+    /* Coin haut-gauche - horizontal */
+    top: 0;
+    left: 0;
+    transform: rotate(0deg);
+  }
+  25% {
+    /* Coin haut-droite - vertical */
+    top: 0;
+    right: 0;
+    left: auto;
+    transform: rotate(90deg);
+  }
+  50% {
+    /* Coin bas-droite - horizontal */
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: auto;
+    transform: rotate(180deg);
+  }
+  75% {
+    /* Coin bas-gauche - vertical */
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    transform: rotate(270deg);
+  }
+  100% {
+    /* Retour coin haut-gauche - horizontal */
+    top: 0;
+    left: 0;
+    bottom: auto;
+    right: auto;
+    transform: rotate(360deg);
+  }
+}
+
+.light-1 {
+  animation: rotate-border 20s linear infinite; /* VITESSE: Modifier 20s pour changer la vitesse */
+}
+
+.light-2 {
+  animation: rotate-border 20s linear infinite; /* VITESSE: Modifier 20s pour changer la vitesse */
+  animation-delay: -10s; /* Décalage de 50% pour opposition à 180° */
+}

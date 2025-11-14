@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Eye, User } from "lucide-react";
+import { Eye } from "lucide-react";
 import TextType from "../Animation/TextType";
 import LeftColumn from "./LeftColumn";
-import Link from "next/link";
 import BtnDownloadCV from "./btn/BtnDownloadCV";
 import Btn from "./btn/Btn";
+import { classNameForIcon } from "@/app/layout";
 
 export default function HeroSection() {
   const [displayText, setDisplayText] = useState("");
@@ -77,7 +77,7 @@ export default function HeroSection() {
             <div className="flex gap-8">
               {/* Voir mes réalisations */}
               <Btn
-                icon={<Eye className="w-5 h-5 group-hover:animate-bounce" />}
+                icon={<Eye className={classNameForIcon} />}
                 text="Voir mes réalisations"
                 href="/mes_realisations"
               />
