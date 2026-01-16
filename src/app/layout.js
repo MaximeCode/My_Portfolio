@@ -18,6 +18,10 @@ export default function RootLayout({ children }) {
           <WaveDivider />
         </div>
       </body>
+      <Script
+        src="https://kit.fontawesome.com/c9030b2646.js"
+        crossorigin="anonymous"
+      ></Script>
       <Script src="../../node_modules/flowbite/dist/flowbite.min.js"></Script>
     </html>
   );

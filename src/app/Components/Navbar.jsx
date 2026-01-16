@@ -15,14 +15,19 @@ export default function Navbar() {
       color: "bluemenu",
     },
     {
-      label: "Mes réalisations",
-      href: "/mes_realisations",
+      label: "Mes compétences",
+      href: "/my_skills",
       color: "goldmenu",
+    },
+    {
+      label: "Mes réalisations",
+      href: "/my_projects",
+      color: "bluemenu",
     },
     {
       label: "Me contacter",
       href: "/contact_me",
-      color: "bluemenu",
+      color: "goldmenu",
     },
   ];
 

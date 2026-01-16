@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Eye } from "lucide-react";
 import TextType from "../Animation/TextType";
 import LeftColumn from "./LeftColumn";
-import BtnDownloadCV from "./btn/BtnDownloadCV";
-import Btn from "./btn/Btn";
+import BtnDownloadCV from "./Front/BtnDownloadCV";
+import Btn from "./Front/Btn";
 import { classNameForIcon } from "@/app/layout";
 
 export default function HeroSection() {
@@ -79,7 +79,7 @@ export default function HeroSection() {
               <Btn
                 icon={<Eye className={classNameForIcon} />}
                 text="Voir mes réalisations"
-                href="/mes_realisations"
+                href="/my_projects"
               />
 
               <BtnDownloadCV />

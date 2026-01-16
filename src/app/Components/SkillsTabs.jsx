@@ -1,62 +1,15 @@
 import React, { useState } from "react";
-import { Code2, Palette, Database, Wrench } from "lucide-react";
+import { skills, tabs } from "../data/skills";
 
 export default function SkillsTabs() {
-  const [activeTab, setActiveTab] = useState("frontend");
-
-  const skills = {
-    frontend: [
-      { name: "React", level: 90, logo: "⚛️" },
-      { name: "Next.js", level: 85, logo: "▲" },
-      { name: "TailwindCSS", level: 95, logo: "🎨" },
-      { name: "JavaScript", level: 90, logo: "JS" },
-      { name: "TypeScript", level: 80, logo: "TS" },
-    ],
-    design: [
-      { name: "Figma", level: 85, logo: "🎯" },
-      { name: "Adobe XD", level: 75, logo: "📐" },
-      { name: "Photoshop", level: 70, logo: "🖼️" },
-      { name: "Illustrator", level: 65, logo: "✏️" },
-    ],
-    backend: [
-      { name: "Node.js", level: 80, logo: "🟢" },
-      { name: "Python", level: 75, logo: "🐍" },
-      { name: "MongoDB", level: 70, logo: "🍃" },
-      { name: "PostgreSQL", level: 75, logo: "🐘" },
-    ],
-    tools: [
-      { name: "Git", level: 90, logo: "📦" },
-      { name: "VS Code", level: 95, logo: "💻" },
-      { name: "Docker", level: 65, logo: "🐳" },
-      { name: "Vercel", level: 85, logo: "▲" },
-    ],
-  };
-
-  const tabs = [
-    { id: "frontend", label: "Frontend", icon: Code2 },
-    { id: "design", label: "Design", icon: Palette },
-    { id: "backend", label: "Backend", icon: Database },
-    { id: "tools", label: "Outils", icon: Wrench },
-  ];
+  const [activeTab, setActiveTab] = useState(tabs[0].id);
 
   return (
-    <div className="max-w-6xl mx-auto">
-      {/* En-tête */}
-      <div className="text-center mb-12 animate-fadeIn">
-        <h1 className="text-5xl font-bold text-foreground mb-4 tracking-tight">
-          Mes <span className="text-secondary">Compétences</span>
-        </h1>
-        <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
-          Découvrez les technologies et outils que je maîtrise pour créer des
-          expériences digitales exceptionnelles
-        </p>
-      </div>
-
+    <>
       {/* Tabs Navigation */}
-      <div className="bg-bg-accent/50 backdrop-blur-sm rounded-2xl p-2 mb-8 border border-muted/30 shadow-2xl">
+      <div className="bg-bg-accent/50 backdrop-blur-sm rounded-2xl p-2 border border-muted/30 shadow-2xl mt-12">
         <div className="flex flex-wrap gap-2">
           {tabs.map((tab) => {
-            const Icon = tab.icon;
             return (
               <button
                 key={tab.id}
@@ -67,7 +20,7 @@ export default function SkillsTabs() {
                     : "text-foreground/70 hover:bg-muted/50 hover:text-foreground"
                 }`}
               >
-                <Icon size={20} />
+                <tab.icon size={20} />
                 <span>{tab.label}</span>
               </button>
             );
@@ -88,9 +41,9 @@ export default function SkillsTabs() {
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="text-3xl group-hover:scale-110 transition-transform duration-300">
+                  {/* <div className="text-3xl group-hover:scale-110 transition-transform duration-300">
                     {skill.logo}
-                  </div>
+                  </div> */}
                   <span className="text-foreground font-semibold text-lg">
                     {skill.name}
                   </span>
@@ -111,7 +64,7 @@ export default function SkillsTabs() {
                     }s backwards`,
                   }}
                 >
-                  <div className="absolute inset-0 bg-white/20 animate-shimmer"></div>
+                  <div className="absolute inset-0 animate-shimmer"></div>
                 </div>
               </div>
             </div>
@@ -120,8 +73,8 @@ export default function SkillsTabs() {
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-secondary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-    </div>
+      {/* <div className="absolute top-20 right-20 w-64 h-64 bg-secondary/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div> */}
+    </>
   );
 }
