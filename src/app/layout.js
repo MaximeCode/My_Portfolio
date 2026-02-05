@@ -2,6 +2,7 @@ import "./globals.css";
 import { WaveDivider } from "./Components/WaveDivider";
 import Script from "next/script";
 import Navbar from "./Components/Navbar";
+import PageTransition from "./Components/PageTransition";
 
 export const classNameForIcon = "w-5 h-5 group-hover:animate-bounce";
 export const ma_pdp = "/img/ma_grosse_tete.jpg";
@@ -12,7 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="fr">
       <body className="min-h-screen bg-gradient-to-b from-background to-bg-accent">
         <Navbar />
-        {children}
+        <PageTransition>{children}</PageTransition>
 
         <div className="fixed bottom-0 left-0 right-0 z-10">
           <WaveDivider />
