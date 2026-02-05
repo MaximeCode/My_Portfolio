@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { skills, tabs } from "../data/skills";
+import { skills, tabs } from "@/app/data/skills";
 
 export default function SkillsTabs() {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
@@ -14,11 +14,10 @@ export default function SkillsTabs() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex-1 min-w-[140px] flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-medium transition-all duration-300 ${
-                  activeTab === tab.id
+                className={`flex-1 min-w-[140px] flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-medium transition-all duration-300 ${activeTab === tab.id
                     ? "bg-secondary text-background shadow-lg shadow-secondary/50 scale-105"
                     : "text-foreground/70 hover:bg-muted/50 hover:text-foreground"
-                }`}
+                  }`}
               >
                 <tab.icon size={20} />
                 <span>{tab.label}</span>
@@ -59,9 +58,8 @@ export default function SkillsTabs() {
                   className="absolute top-0 left-0 h-full bg-gradient-to-r from-secondary to-primary rounded-full transition-all duration-1000 ease-out"
                   style={{
                     width: `${skill.level}%`,
-                    animation: `progressFill 1s ease-out ${
-                      index * 0.1
-                    }s backwards`,
+                    animation: `progressFill 1s ease-out ${index * 0.1
+                      }s backwards`,
                   }}
                 >
                   <div className="absolute inset-0 animate-shimmer"></div>

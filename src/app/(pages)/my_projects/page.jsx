@@ -18,116 +18,14 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github, MailPlus } from "lucide-react";
+import { ExternalLink, Github, MailPlus, Star } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
-import { ReactLight } from "@/components/ui/svgs/reactLight";
 import Btn from "@/app/Components/Front/Btn";
 
-export default function MyProjectsPage() {
-  const projectsByTechnology = [
-    {
-      technology: "Next.js & React",
-      icon: <ReactLight />,
-      projects: [
-        {
-          title: "Solirun",
-          description:
-            "Application e-commerce complète avec panier, paiements, gestion des stocks et interface d'administration avancée.",
-          image:
-            "https://images.unsplash.com/photo-1658297063569-162817482fb6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjBvbmxpbmUlMjBzaG9wcGluZ3xlbnwxfHx8fDE3NjMwOTAzOTF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-          technologies: ["React", "TypeScript", "Tailwind CSS", "Redux"],
-          link: "https://example.com",
-          github: "https://github.com",
-        },
-        {
-          title: "Dashboard Analytics",
-          description:
-            "Tableau de bord interactif avec graphiques en temps réel, filtres avancés et export de données.",
-          image:
-            "https://images.unsplash.com/photo-1643116774075-acc00caa9a7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMGNvZGV8ZW58MXx8fHwxNzYzMDI2MDIxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-          technologies: ["React", "Chart.js", "Material-UI", "API REST"],
-          link: "https://example.com",
-        },
-        {
-          title: "Portfolio Créatif",
-          description:
-            "Site portfolio avec animations avancées, galerie interactive et formulaire de contact personnalisé.",
-          image:
-            "https://images.unsplash.com/photo-1643116774075-acc00caa9a7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMGNvZGV8ZW58MXx8fHwxNzYzMDI2MDIxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-          technologies: ["React", "Motion", "Three.js", "GSAP"],
-          github: "https://github.com",
-        },
-        {
-          title: "Application Météo",
-          description:
-            "Application météo avec prévisions détaillées, géolocalisation et notifications push.",
-          image:
-            "https://images.unsplash.com/photo-1643116774075-acc00caa9a7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMGNvZGV8ZW58MXx8fHwxNzYzMDI2MDIxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-          technologies: ["React", "OpenWeather API", "PWA", "Service Workers"],
-          link: "https://example.com",
-        },
-      ],
-    },
-    {
-      technology: "Backend & API",
-      icon: "🔧",
-      projects: [
-        {
-          title: "API RESTful E-commerce",
-          description:
-            "API complète pour plateforme e-commerce avec authentification, gestion produits et paiements.",
-          image:
-            "https://images.unsplash.com/photo-1641156803026-0b819059b04d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYWNrZW5kJTIwc2VydmVyJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NjMwNzc4NTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-          technologies: ["Node.js", "Express", "MongoDB", "JWT"],
-          github: "https://github.com",
-        },
-        {
-          title: "Système de Gestion CRM",
-          description:
-            "Backend pour CRM avec gestion clients, pipeline de ventes et automatisation marketing.",
-          image:
-            "https://images.unsplash.com/photo-1641156803026-0b819059b04d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYWNrZW5kJTIwc2VydmVyJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NjMwNzc4NTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-          technologies: ["Node.js", "PostgreSQL", "Redis", "Bull Queue"],
-          link: "https://example.com",
-        },
-        {
-          title: "Microservices Architecture",
-          description:
-            "Architecture microservices pour application de réservation avec messaging asynchrone.",
-          image:
-            "https://images.unsplash.com/photo-1641156803026-0b819059b04d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYWNrZW5kJTIwc2VydmVyJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NjMwNzc4NTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-          technologies: ["Node.js", "Docker", "RabbitMQ", "Kubernetes"],
-          github: "https://github.com",
-        },
-      ],
-    },
-    {
-      technology: "Full-Stack",
-      icon: "🚀",
-      projects: [
-        {
-          title: "Plateforme de Réservation",
-          description:
-            "Système complet de réservation en ligne avec calendrier, paiements et notifications.",
-          image:
-            "https://images.unsplash.com/photo-1643116774075-acc00caa9a7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMGNvZGV8ZW58MXx8fHwxNzYzMDI2MDIxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-          technologies: ["Next.js", "Prisma", "PostgreSQL", "Stripe"],
-          link: "https://example.com",
-        },
-        {
-          title: "Blog Multi-utilisateurs",
-          description:
-            "Plateforme de blogging avec éditeur riche, commentaires, likes et système d'abonnement.",
-          image:
-            "https://images.unsplash.com/photo-1643116774075-acc00caa9a7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMGNvZGV8ZW58MXx8fHwxNzYzMDI2MDIxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-          technologies: ["Next.js", "MongoDB", "NextAuth", "AWS S3"],
-          github: "https://github.com",
-        },
-      ],
-    },
-  ];
+import { projectsByTechnology } from "@/app/data/projects.data";
 
+export default function MyProjectsPage() {
   return (
     <Base>
       <Title text="Mes réalisations" />
@@ -181,14 +79,18 @@ export default function MyProjectsPage() {
                       <Card className="bg-[#141b3d] border-[#fbbf24]/20 overflow-hidden h-full pt-0 hover:border-[#60a5fa]/50 transition-all duration-300 group">
                         <div className="relative h-48 overflow-hidden">
                           <Image
-                            src={project.image || "/img/hp_solirun.png"}
+                            src={`/img/${project.image}.png`}
                             alt={project.title}
                             width={1080}
                             height={500}
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/40 to-transparent" />
-
+                          {project.fav && (
+                            <span className="p-2 bg-[#fbbf24] text-[#0a0e27] rounded-full absolute top-3 left-3 z-10">
+                              <Star className="w-4 h-4" />
+                            </span>
+                          )}
                           {/* Links Overlay */}
                           <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             {project.link && (

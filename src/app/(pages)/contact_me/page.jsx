@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Linkedin, Send } from "lucide-react";
-import { Github } from "lucide-react";
+import { Send } from "lucide-react";
 import Title from "@/app/Components/Front/Title";
 import Base from "@/app/Components/Front/Base";
 import { classNameForIcon } from "@/app/layout";
-import Btn from "../Components/Front/Btn";
+import Btn from "../../Components/Front/Btn";
+
+import { mySocialMedias } from "@/app/data/contact.data";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -36,23 +37,6 @@ export default function ContactPage() {
       [e.target.name]: e.target.value,
     }));
   };
-
-  const mySocialMedias = [
-    {
-      name: "LinkedIn",
-      icon: (
-        <Linkedin className="w-12 h-12 text-[#60a5fa] transition-all duration-500 group-hover:text-[#fbbf24] relative z-10" />
-      ),
-      url: "https://linkedin.com/in/maximebaude/",
-    },
-    {
-      name: "GitHub",
-      icon: (
-        <Github className="w-12 h-12 text-[#60a5fa] transition-all duration-500 group-hover:text-[#fbbf24] relative z-10" />
-      ),
-      url: "https://github.com/maximecode",
-    },
-  ];
 
   return (
     <Base>

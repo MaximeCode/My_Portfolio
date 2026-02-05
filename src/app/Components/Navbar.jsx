@@ -40,7 +40,7 @@ export default function Navbar() {
             <Link
               href={item.href}
               key={item.href}
-              className={`${item.color} text-foreground text-lg transition-all duration-300 px-4 py-2 border-2 border-transparent rounded-lg hover:scale-105 hover:shadow-lg`}
+              className={`${item.color} text-foreground text-lg transition-all duration-300 px-4 py-2 rounded-lg hover:scale-105 hover:shadow-lg`}
             >
               {item.label}
             </Link>

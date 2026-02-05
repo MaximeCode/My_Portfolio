@@ -10,29 +10,22 @@ import {
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import {
-  User,
-  Calendar,
-  Mail,
-  Phone,
-  MapPin,
-  GraduationCap,
-  Github,
   Eye,
-  ArrowRight,
   ExternalLink,
   Lock,
   MailPlus,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import BtnDownloadCV from "@/app/Components/Front/BtnDownloadCV";
 import Btn from "@/app/Components/Front/Btn";
 import { classNameForIcon } from "@/app/layout";
 import Title from "@/app/Components/Front/Title";
 import Base from "@/app/Components/Front/Base";
 
-export default function AboutPage() {
-  const [showSchoolProjectModal, setShowSchoolProjectModal] = useState(false);
+import { personalInfo, education } from "@/app/data/qui_suis_je.data";
+import { projectsByTechnology } from "@/app/data/projects.data";
 
+export default function AboutPage() {
   const scrollToEducation = (year) => {
     const ref = educationRefs[year];
     if (ref.current) {
@@ -40,104 +33,27 @@ export default function AboutPage() {
     }
   };
 
-  const personalInfo = [
-    { icon: User, label: "Nom", value: "Maxime BAUDE" },
-    { icon: Calendar, label: "Âge", value: "20 ans" },
-    { icon: Mail, label: "Email", value: "contact.mbaude@gmail.com" },
-    { icon: Phone, label: "Téléphone", value: "+33 7 62 17 11 77" },
-    {
-      icon: MapPin,
-      label: "Localisation",
-      value: "Orléans (45), Chartres (28) France",
-    },
-    {
-      icon: GraduationCap,
-      label: "Diplôme",
-      value: "BTS SIO Développement Web",
-    },
-    {
-      icon: Github,
-      label: "GitHub",
-      value: "github.com/MaximeCode",
-      link: "https://github.com/MaximeCode",
-    },
-  ];
-
-  const projects = [
-    {
-      title: "Site vitrine pour le club de badminton de lucé (28)",
-      description:
-        "En freelance, j'ai développé le site vitrine pour le club de badminton de lucé (28), avec WordPress pour une administration plus simple pour les dirigeants du club. Ce site est hébergé sur un serveur mutualisé chez OVH et est optimisé pour les moteurs de recherche grâce à du référencement naturel.",
-      technologies: ["WordPress", "PHP", "Apache", "MySQL"],
-      image: "hp_alba",
-      link: "https://albabadminton.fr",
-    },
-    {
-      title:
-        "Application pour l'évènement caritatif du lycée Fulbert : La Solirun",
-      description:
-        "Création d'une application pour gérer l'évènement annuel du lycée Fulbert à Chartres (28), avec une interface admin pour gérer les participants et les courses. Le tout en Next.js avec React, TailwindCSS et daisyUI, PHP et MySQL pour le back-end. Un websocket a également été implémenté pour la communication en temps réel entre l'application et l'écran géant affichant les résultats en direct à tous les élèves et professeurs. Cet application a été développée par un collègue et moi-même, et n'est pas disponible publiquement (le lycée étant le propriétaire).",
-      technologies: [
-        "Next.JS",
-        "React",
-        "TailwindCSS",
-        "daisyUI",
-        "PHP",
-        "MySQL",
-      ],
-      image: "minia_hp_solirun",
-      // link: "https://example.com",
-    },
-    {
-      title: "Nuit de l'Info 2025",
-      description:
-        "En tant que chef de projet, j'ai encadré une équipe composée d'un ami et de moi-même pour développer une application web en Next.JS et React durant l'édition de la Nuit de l'Info 2025. Celle-ci soutient l'idéologie de l'association NIRD contre l'utilisation de ressources provenant d'autres pays, l'obsolescence programmée du matériel informtique... Nous avons eu 15h30 pour la réaliser (de 16h30 à 8h le lendemain matin). Durant l'évènement, nous avions à choisir 5 défis à réaliser, tous sont présent et fonctionnels dans notre app. L'un d'eux est le chatbot présent sur la page d'accueil, je l'ai connecté avec l'IA française MistralAI pour qu'il répondre à toutes les questions de utilisateur. L'app est hébergé sur notre serveur personnel, conteneurisée avec Docker. PS: Il y a un jeu Snake caché dans l'app, saurez-vous le trouver ?",
-      technologies: [
-        "Next.JS",
-        "React",
-        "TailwindCSS",
-        "API MistralAI",
-        "Docker",
-      ],
-      image: "hp_NI25",
-      link: "https://nuit-info-2025.speakzy.fr/",
-    },
-  ];
-
-  const education = [
-    {
-      year: "2028",
-      degree: "Master Architecture & Développement Logiciel",
-      school: "CODA_ School, Orléans (45)",
-      description:
-        "J'ai pour projet de devenir chef de projet web et pour cela, je prévois de poursuivre mes études vers un master orienté architecture logicielle, gestion de projet et cybersécurité.",
-    },
-    {
-      year: "2026",
-      degree: "3ème année Bachelor Développeur Full-Stack",
-      school: "CODA_ School, Orléans (45)",
-      description:
-        "En alternance chez Kiwik, avec un rythme de 3 semaines en entreprise et 1 semaine en école. Formation en Développement Web Full-Stack grâce à des intervenants expérimentés et des projets variés. Activités principales : Approfondissement de React, Node.JS, Diagrammes UML, API REST, Docker, Symfony... Passage du diplôme en juin 2026.",
-    },
-    {
-      year: "2025",
-      degree: "BTS SIO SLAM ",
-      school: "Lycée Fulbert, Chartres (28)",
-      description:
-        "Formation en développement web full-stack, comprenant Front-end, Back-end, gestion de bases de données et de serveurs (SQL, Apache, Nginx...). Activités principales : développement web avec HTML, CSS, JavaScript, PHP, MySQL, et développement application en C#. Apprentissage de la Programmation Orientée Objet et des méthodologies agiles. Diplôme obtenu et option Mathématiques Approfondies validée.",
-    },
-    {
-      year: "2023",
-      degree: "BAC Pro Systèmes Numériques Option C : RISC",
-      school: "Lycée Sully, Nogent-le-Rotrou (28)",
-      description:
-        "Formation aux réseaux et systèmes d'administration, et découverte de la programmation informatique. Activités principales : configuration, installation et test d'équipements réseaux tels que des switchs, des routeurs ou des serveurs ADDS, DNS, DHCP, Ipfire, GPO, VLAN... Également virtualisation de serveursavec VirtualBox et Proxmox. Diplôme obtenu avec mention Très Bien & mention Européenne.",
-    },
-  ];
-
   // Prends les années de l'array education et crée un ref pour chaque année
   const educationRefs = {};
   education.map((edu) => (educationRefs[edu.year] = useRef(null)));
+
+  /**
+   * Type pour l'autocomplétion de l'IDE
+   * @type {Array<{
+   *   title: string,
+   *   description: string,
+   *   technologies: string[],
+   *   image: string,
+   *   link?: string,
+   *   github?: string,
+   *   fav?: boolean,
+   *   in_progress?: boolean,
+   *   object_classes?: string
+   * }>}
+   */
+  const projectsFavorites = projectsByTechnology
+    .flatMap((section) => section.projects)
+    .filter((project) => project.fav);
 
   return (
     <Base>
@@ -202,10 +118,9 @@ export default function AboutPage() {
                     >
                       <span
                         className={`
-                          ${
-                            (info.value.includes("@") ||
-                              info.value.includes("+33")) &&
-                            "hover:text-[#fbbf24] transition-colors cursor-pointer"
+                          ${(info.value.includes("@") ||
+                            info.value.includes("+33")) &&
+                          "hover:text-[#fbbf24] transition-colors cursor-pointer"
                           }
                           `}
                       >
@@ -225,6 +140,15 @@ export default function AboutPage() {
         <h2 className="text-4xl font-bold text-[#fbbf24] mb-12 text-center">
           Mon Parcours
         </h2>
+
+
+        <button data-tooltip-target="tooltip-default" type="button" className="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Default tooltip</button>
+
+        <div id="tooltip-default" role="tooltip" className="absolute z-10 invisible text-red-500 bg-white tooltip">
+          Tooltip content
+          <div className="tooltip-arrow" data-popper-arrow></div>
+        </div>
+
 
         {/* Timeline Navigation */}
         <div className="flex justify-center gap-4 mb-12">
@@ -251,17 +175,15 @@ export default function AboutPage() {
             <div
               key={index}
               ref={educationRefs[edu.year]}
-              className={`relative mb-12 md:mb-16 ${
-                index % 2 === 0
-                  ? "pr-12 mr-auto text-right"
-                  : "pl-12 ml-auto text-left"
-              } w-1/2`}
+              className={`relative mb-12 md:mb-16 ${index % 2 === 0
+                ? "pr-12 mr-auto text-right"
+                : "pl-12 ml-auto text-left"
+                } w-1/2`}
             >
               {/* Timeline Dot */}
               <div
-                className={`absolute top-0 w-4 h-4 bg-[#fbbf24] rounded-full border-4 border-[#0a0e27] ${
-                  index % 2 === 0 ? "-right-2" : "-left-2"
-                }`}
+                className={`absolute top-0 w-4 h-4 bg-[#fbbf24] rounded-full border-4 border-[#0a0e27] ${index % 2 === 0 ? "-right-2" : "-left-2"
+                  }`}
               />
 
               {/* Content Card */}
@@ -288,7 +210,7 @@ export default function AboutPage() {
           Mes Projets Favoris
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+          {projectsFavorites.map((project, index) => (
             <div key={index}>
               <Card className="pt-0 bg-[#141b3d] border-[#fbbf24]/20 overflow-hidden h-full hover:border-[#60a5fa]/50 transition-all duration-300">
                 <div className="relative h-48 overflow-hidden">
@@ -297,25 +219,109 @@ export default function AboutPage() {
                     alt={project.title}
                     width={1080}
                     height={500}
-                    className="w-full h-full object-top object-cover transition-transform duration-500 hover:scale-110"
+                    className={`w-full h-full ${project.object_classes || "object-top object-cover"} transition-transform duration-500 hover:scale-110`}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/20 to-transparent"></div>
+                  {project.in_progress && (
+                    <Badge
+                      variant="outline"
+                      className="bg-[#60a5fa] text-white text-xs border-[#60a5fa] absolute top-3 right-3 z-10"
+                    >
+                      EN COURS DE D&Eacute;VELOPPEMENT
+                    </Badge>
+                  )}
                 </div>
                 <CardHeader>
                   <CardTitle className="text-[#f5e6d3] flex items-center justify-between">
                     {project.title}
-                    <a
-                      href={project.link || "#modal_info_no_public_project"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer"
-                    >
-                      {project.link ? (
+                    {project.link ? (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer"
+                      >
                         <ExternalLink className="w-5 h-5" />
-                      ) : (
-                        <Lock className="w-5 h-5" />
-                      )}
-                    </a>
+                      </a>
+                    ) : (
+                      <>
+                        {/* <button
+                          type="button"
+                          data-modal-target={`modal-private-project-${index}`}
+                          data-modal-toggle={`modal-private-project-${index}`}
+                          className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer bg-transparent p-0 border-none outline-none inline-flex"
+                          aria-label="Projet privé - plus d'informations"
+                        > */}
+                        <Lock className="w-5 h-5 text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-not-allowed" />
+                        {/* Modal projet privé */}
+                        {/* </button>
+                          <div
+                            id={`modal-private-project-${index}`}
+                            tabIndex={-1}
+                            aria-hidden="true"
+                            className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+                          >
+                            <div className="relative p-4 w-full max-w-2xl max-h-full">
+                              <div className="relative bg-[#141b3d] border border-[#fbbf24]/20 rounded-lg shadow-xl p-4 md:p-6">
+                                <div className="flex items-center justify-between border-b border-[#60a5fa]/20 pb-4 md:pb-5">
+                                  <h3 className="text-lg font-medium text-[#fbbf24]">
+                                    Projet privé
+                                  </h3>
+                                  <button
+                                    type="button"
+                                    className="text-[#f5e6d3] bg-transparent hover:bg-[#1e2a5e] hover:text-[#fbbf24] rounded-lg text-sm w-9 h-9 ms-auto inline-flex justify-center items-center transition-colors"
+                                    data-modal-hide={`modal-private-project-${index}`}
+                                  >
+                                    <svg
+                                      className="w-5 h-5"
+                                      aria-hidden="true"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="24"
+                                      height="24"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M6 18 17.94 6M18 18 6.06 6"
+                                      />
+                                    </svg>
+                                    <span className="sr-only">Fermer</span>
+                                  </button>
+                                </div>
+                                <div className="space-y-4 py-4 md:py-6">
+                                  <p className="text-[#f5e6d3] font-medium">
+                                    {project.title}
+                                  </p>
+                                  <p className="leading-relaxed text-[#f5e6d3]/80">
+                                    Ce projet est privé, l&apos;établissement en est le
+                                    propriétaire. Contactez-moi pour plus
+                                    d&apos;informations.
+                                  </p>
+                                </div>
+                                <div className="flex border-t border-[#60a5fa]/20 pt-4 md:pt-5 gap-4">
+                                  <Btn
+                                    icon={<MailPlus className={classNameForIcon} />}
+                                    href="/contact_me"
+                                    text="Me contacter"
+                                    size="md"
+                                  />
+                                  <button
+                                    type="button"
+                                    data-modal-hide={`modal-private-project-${index}`}
+                                    className="text-[#f5e6d3] bg-[#1e2a5e] border border-[#60a5fa]/30 hover:bg-[#60a5fa]/10 hover:border-[#fbbf24]/50 rounded-lg px-4 py-2.5 text-sm font-medium transition-all"
+                                  >
+                                    Fermer
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                        </div> */}
+                      </>
+                    )}
                   </CardTitle>
                   <CardDescription className="text-[#f5e6d3]/70">
                     {project.description}
@@ -369,6 +375,6 @@ export default function AboutPage() {
           />
         </div>
       </div>
-    </Base>
+    </Base >
   );
 }

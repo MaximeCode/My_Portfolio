@@ -1,8 +1,8 @@
 "use client";
 
-import Base from "../Components/Front/Base";
-import Title from "../Components/Front/Title";
-import SkillsTabs from "../Components/SkillsTabs";
+import Base from "../../Components/Front/Base";
+import Title from "../../Components/Front/Title";
+import SkillsTabs from "../../Components/SkillsTabs";
 
 export default function MySkillspage() {
   return (
