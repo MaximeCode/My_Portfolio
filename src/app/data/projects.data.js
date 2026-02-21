@@ -15,18 +15,18 @@ export const projectsByTechnology = [
                 github: "https://github.com/MaximeCode/alba_badminton",
                 fav: true,
             },
-            {
-                title: "Site vitrine pour le club de badminton d'Orléans (45)",
-                description:
-                    "Refonte fonctionnelle et visuelle du site vitrine du club de badminton d'Orléans (45) dont je suis adhérent.",
-                technologies: [],
-                image: "Logo_CLTO",
-                link: "",
-                github: "",
-                fav: true,
-                in_progress: true,
-                object_classes: "object-center object-contain"
-            },
+            // {
+            //     title: "Site vitrine pour le club de badminton d'Orléans (45)",
+            //     description:
+            //         "Refonte fonctionnelle et visuelle du site vitrine du club de badminton d'Orléans (45) dont je suis adhérent.",
+            //     technologies: [],
+            //     image: "Logo_CLTO",
+            //     link: "",
+            //     github: "",
+            //     fav: true,
+            //     in_progress: true,
+            //     object_classes: "object-center object-contain"
+            // },
         ],
     },
     {
@@ -72,14 +72,18 @@ export const projectsByTechnology = [
         icon: "🔧",
         projects: [
             {
-                title: "API RESTful E-commerce",
+                title: "Satival Hemp-IT",
                 description:
-                    "API complète pour plateforme e-commerce avec authentification, gestion produits et paiements.",
-                image:
-                    "https://images.unsplash.com/photo-1641156803026-0b819059b04d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYWNrZW5kJTIwc2VydmVyJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NjMwNzc4NTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                technologies: ["Node.js", "Express", "MongoDB", "JWT"],
-                github: "https://github.com",
+                    "Projet professionnel réalisé en alternance chez Kiwik. Création d'une API REST complète pour une application de gestion de parcelles pour une coopérative d'agriculteurs. Authentification JWT, Refresh Token, gestion des parcelles et des utilisateurs.<br>Création d'une nouvelle partie dans l'application pour gérer la nouvelle culure. J'ai suivi les étapes de développement agiles pour la réalisation du projet, encadré par mon chef de projet. J'ai participé aux réunions avec le client pour comprendre les besoins et les contraintes, et je l'ai accompagné dans son utilisation. L'application est disponible publiquement mais seuls les membres de la coopérative peuvent y accéder.",
+                image: "hp_satival",
+                technologies: ["Symfony", "API REST", "PHP", "MySQL", "JWT"],
             },
+            {
+                title: "Karl Storz - Endocontact",
+                description: "Projet professionnel réalisé en alternance chez Kiwik. Création d'une nouvelle section dans l'intranet de l'entreprise de location de matériel médical de Karl Storz. Cette section permet de gérer les rapports d'inspection de l'équipement médical. J'ai travaillé sous la directive de mon chef de projet, appliqué les méthodologies agiles et formé le client au fonctionnement de cette nouvelle partie. J'ai modifié la base de données pour gérer toutes les données et les reliées aux clients/utilisateurs/articles médicaux...",
+                image: "hp_ks",
+                technologies: ["Symfony", "PHP", "MySQL", "Twig", ],
+            }
         ],
     }
 ];
