@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { mySocialMedias } from "@/app/data/contact.data";
 import {
   Building2,
   MapPin,
@@ -52,20 +53,18 @@ export default function ContactSection() {
   return (
     <div className="max-w-7xl mx-auto">
       {/* En-tête */}
-      <div className="text-center mb-16">
-        <h1 className="text-5xl font-bold text-foreground mb-4 tracking-tight animate-fadeIn">
-          Contactez-<span className="text-secondary">moi</span>
-        </h1>
-        <p className="text-foreground/70 text-lg max-w-2xl mx-auto animate-fadeIn">
-          Une approche agile pour tester les hypothèses et se connecter avec les
-          besoins de votre audience, tôt et souvent.
+      <div className="text-[#f5e6d3]/70 max-w-4xl mx-auto text-lg mb-10">
+        <p>Une question ? Un projet ?</p>
+        <p>
+          N'hésitez pas à me contacter via ce formulaire. Je vous répondrai dans
+          les plus brefs délais.
         </p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Formulaire */}
         <div className="lg:col-span-2">
-          <div className="bg-bg-accent/40 backdrop-blur-sm rounded-2xl p-8 border border-muted/30 shadow-2xl">
+          <div className="h-full bg-bg-accent/40 backdrop-blur-sm rounded-2xl p-8 border border-muted/30 shadow-2xl">
             {isSubmitted ? (
               <div className="text-center py-16 animate-fadeIn">
                 <CheckCircle2 className="w-20 h-20 text-secondary mx-auto mb-6 animate-bounce" />
@@ -81,45 +80,45 @@ export default function ContactSection() {
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Prénom */}
                   <div className="group">
-                    <label className="block text-foreground font-medium mb-2 transition-colors duration-300 group-hover:text-secondary">
+                    <label htmlFor="firstName" className="block text-foreground font-medium mb-2 transition-colors duration-300 group-hover:text-secondary">
                       Prénom
                     </label>
                     <input
                       type="text"
                       name="firstName"
+                      id="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
                       onFocus={() => handleFocus("firstName")}
                       onBlur={() => handleBlur("firstName")}
-                      placeholder="Bonnie"
+                      placeholder="Bill"
                       required
-                      className={`w-full px-4 py-3 bg-muted/30 border rounded-xl text-foreground placeholder-foreground/40 focus:outline-none transition-all duration-300 ${
-                        isFocused.firstName
-                          ? "border-secondary shadow-lg shadow-secondary/20 scale-105"
-                          : "border-muted/50 hover:border-muted"
-                      }`}
+                      className={`w-full px-4 py-3 bg-muted/30 border rounded-xl text-foreground placeholder-foreground/40 focus:outline-none transition-all duration-300 ${isFocused.firstName
+                        ? "border-secondary shadow-lg shadow-secondary/20 scale-105"
+                        : "border-muted/50 hover:border-muted"
+                        }`}
                     />
                   </div>
 
                   {/* Nom */}
                   <div className="group">
-                    <label className="block text-foreground font-medium mb-2 transition-colors duration-300 group-hover:text-secondary">
+                    <label htmlFor="lastName" className="block text-foreground font-medium mb-2 transition-colors duration-300 group-hover:text-secondary">
                       Nom
                     </label>
                     <input
                       type="text"
                       name="lastName"
+                      id="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
                       onFocus={() => handleFocus("lastName")}
                       onBlur={() => handleBlur("lastName")}
-                      placeholder="Green"
+                      placeholder="Gates"
                       required
-                      className={`w-full px-4 py-3 bg-muted/30 border rounded-xl text-foreground placeholder-foreground/40 focus:outline-none transition-all duration-300 ${
-                        isFocused.lastName
-                          ? "border-secondary shadow-lg shadow-secondary/20 scale-105"
-                          : "border-muted/50 hover:border-muted"
-                      }`}
+                      className={`w-full px-4 py-3 bg-muted/30 border rounded-xl text-foreground placeholder-foreground/40 focus:outline-none transition-all duration-300 ${isFocused.lastName
+                        ? "border-secondary shadow-lg shadow-secondary/20 scale-105"
+                        : "border-muted/50 hover:border-muted"
+                        }`}
                     />
                   </div>
                 </div>
@@ -127,7 +126,7 @@ export default function ContactSection() {
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Email */}
                   <div className="group">
-                    <label className="block text-foreground font-medium mb-2 transition-colors duration-300 group-hover:text-secondary">
+                    <label htmlFor="email" className="block text-foreground font-medium mb-2 transition-colors duration-300 group-hover:text-secondary">
                       Email
                     </label>
                     <div className="relative">
@@ -135,24 +134,24 @@ export default function ContactSection() {
                       <input
                         type="email"
                         name="email"
+                        id="email"
                         value={formData.email}
                         onChange={handleChange}
                         onFocus={() => handleFocus("email")}
                         onBlur={() => handleBlur("email")}
-                        placeholder="name@example.com"
+                        placeholder="bill.gates@microsoft.com"
                         required
-                        className={`w-full pl-12 pr-4 py-3 bg-muted/30 border rounded-xl text-foreground placeholder-foreground/40 focus:outline-none transition-all duration-300 ${
-                          isFocused.email
-                            ? "border-secondary shadow-lg shadow-secondary/20 scale-105"
-                            : "border-muted/50 hover:border-muted"
-                        }`}
+                        className={`w-full pl-12 pr-4 py-3 bg-muted/30 border rounded-xl text-foreground placeholder-foreground/40 focus:outline-none transition-all duration-300 ${isFocused.email
+                          ? "border-secondary shadow-lg shadow-secondary/20 scale-105"
+                          : "border-muted/50 hover:border-muted"
+                          }`}
                       />
                     </div>
                   </div>
 
                   {/* Téléphone */}
                   <div className="group">
-                    <label className="block text-foreground font-medium mb-2 transition-colors duration-300 group-hover:text-secondary">
+                    <label htmlFor="phone" className="block text-foreground font-medium mb-2 transition-colors duration-300 group-hover:text-secondary">
                       Téléphone
                     </label>
                     <div className="relative">
@@ -160,16 +159,16 @@ export default function ContactSection() {
                       <input
                         type="tel"
                         name="phone"
+                        id="phone"
                         value={formData.phone}
                         onChange={handleChange}
                         onFocus={() => handleFocus("phone")}
                         onBlur={() => handleBlur("phone")}
                         placeholder="+33 6 12 34 56 78"
-                        className={`w-full pl-12 pr-4 py-3 bg-muted/30 border rounded-xl text-foreground placeholder-foreground/40 focus:outline-none transition-all duration-300 ${
-                          isFocused.phone
-                            ? "border-secondary shadow-lg shadow-secondary/20 scale-105"
-                            : "border-muted/50 hover:border-muted"
-                        }`}
+                        className={`w-full pl-12 pr-4 py-3 bg-muted/30 border rounded-xl text-foreground placeholder-foreground/40 focus:outline-none transition-all duration-300 ${isFocused.phone
+                          ? "border-secondary shadow-lg shadow-secondary/20 scale-105"
+                          : "border-muted/50 hover:border-muted"
+                          }`}
                       />
                     </div>
                   </div>
@@ -177,11 +176,12 @@ export default function ContactSection() {
 
                 {/* Message */}
                 <div className="group">
-                  <label className="block text-foreground font-medium mb-2 transition-colors duration-300 group-hover:text-secondary">
+                  <label htmlFor="message" className="block text-foreground font-medium mb-2 transition-colors duration-300 group-hover:text-secondary">
                     Votre message
                   </label>
                   <textarea
                     name="message"
+                    id="message"
                     value={formData.message}
                     onChange={handleChange}
                     onFocus={() => handleFocus("message")}
@@ -189,16 +189,15 @@ export default function ContactSection() {
                     rows="6"
                     placeholder="Laissez un message..."
                     required
-                    className={`w-full px-4 py-3 bg-muted/30 border rounded-xl text-foreground placeholder-foreground/40 focus:outline-none resize-none transition-all duration-300 ${
-                      isFocused.message
-                        ? "border-secondary shadow-lg shadow-secondary/20 scale-[1.02]"
-                        : "border-muted/50 hover:border-muted"
-                    }`}
+                    className={`w-full px-4 py-3 bg-muted/30 border rounded-xl text-foreground placeholder-foreground/40 focus:outline-none resize-none transition-all duration-300 ${isFocused.message
+                      ? "border-secondary shadow-lg shadow-secondary/20 scale-[1.02]"
+                      : "border-muted/50 hover:border-muted"
+                      }`}
                   />
                 </div>
 
                 {/* Legal */}
-                <p className="text-foreground/50 text-sm">
+                {/* <p className="text-foreground/50 text-sm">
                   En soumettant ce formulaire, vous acceptez nos{" "}
                   <span className="text-secondary hover:text-primary transition-colors cursor-pointer">
                     conditions générales
@@ -208,7 +207,7 @@ export default function ContactSection() {
                     politique de confidentialité
                   </span>
                   .
-                </p>
+                </p> */}
 
                 {/* Submit Button */}
                 <button
@@ -224,35 +223,36 @@ export default function ContactSection() {
         </div>
 
         {/* Informations Contact */}
-        <div className="space-y-6">
-          {/* Entreprise */}
+        <div className="space-y-6 flex flex-col justify-between h-full">
+          {/* Freelance */}
           <div className="bg-bg-accent/40 backdrop-blur-sm rounded-2xl p-6 border border-muted/30 shadow-2xl hover:border-secondary/30 transition-all duration-300 hover:scale-105 group">
             <div className="flex items-center gap-4 mb-4">
               <div className="p-3 bg-secondary/10 rounded-xl group-hover:bg-secondary/20 transition-colors duration-300">
                 <Building2 className="w-6 h-6 text-secondary" />
               </div>
               <h3 className="text-xl font-bold text-foreground">
-                Informations
+                Statut professionnel
               </h3>
             </div>
             <div className="text-foreground/70 space-y-2">
-              <p className="font-semibold text-foreground">Votre Entreprise</p>
-              <p>SIRET: XXX XXX XXX XXXXX</p>
+              <p>Freelance</p>
             </div>
           </div>
 
-          {/* Adresse */}
+          {/* Localisation */}
           <div className="bg-bg-accent/40 backdrop-blur-sm rounded-2xl p-6 border border-muted/30 shadow-2xl hover:border-secondary/30 transition-all duration-300 hover:scale-105 group">
             <div className="flex items-center gap-4 mb-4">
               <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors duration-300">
                 <MapPin className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-xl font-bold text-foreground">Adresse</h3>
+              <h3 className="text-xl font-bold text-foreground">Localisation</h3>
             </div>
             <div className="text-foreground/70 space-y-1">
-              <p>Paris, France</p>
-              <p>123 Rue de la Tech</p>
-              <p>Code postal: 75001</p>
+              <ul>
+                <li>Orléans (45)</li>
+                <li>Chartres (28)</li>
+                <li>France</li>
+              </ul>
             </div>
           </div>
 
@@ -263,20 +263,45 @@ export default function ContactSection() {
                 <Phone className="w-6 h-6 text-secondary" />
               </div>
               <h3 className="text-xl font-bold text-foreground">
-                Appelez-nous
+                Appelez-moi
               </h3>
             </div>
             <p className="text-foreground/70 mb-3">
-              Contactez-nous pour échanger. Nous sommes toujours disponibles
-              pour vous aider.
+              Contactez-moi pour échanger. Je suis toujours disponible pour vous aider.
             </p>
-            <button
-              onClick={() => (window.location.href = "tel:+33123456789")}
+            <a
               className="text-primary text-lg font-semibold hover:text-secondary transition-colors duration-300"
+              href="tel:+33762171177"
             >
-              +33 1 23 45 67 89
-            </button>
+              07 62 17 11 77
+            </a>
           </div>
+        </div>
+      </div>
+
+      <div className=" mt-10 flex flex-col justify-center h-full col-span-1">
+        <p className="text-[#f5e6d3] mb-8 text-2xl text-center">
+          Retrouvez-moi également sur
+        </p>
+
+        <div className="flex justify-center gap-6 flex-wrap">
+          {mySocialMedias.map((media) => (
+            <a
+              href={media.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative"
+              key={media.name}
+              style={{ minWidth: 140, maxWidth: 160, width: "150px" }} // For robustness
+            >
+              <div className="flex flex-col items-center justify-center w-full relative overflow-hidden rounded-xl bg-gradient-to-br from-[#141b3d] to-[#0a0e27] border border-[#60a5fa]/30 p-8 transition-all duration-500 hover:scale-110 hover:border-[#fbbf24] hover:shadow-2xl hover:shadow-[#fbbf24]/30 min-w-[140px] max-w-[160px]">
+                {media.icon}
+                <p className="mt-4 text-[#60a5fa] group-hover:text-secondary text-sm transition-all duration-300 delay-100 relative z-10">
+                  {media.name}
+                </p>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
       {/* Decorative Elements */}
