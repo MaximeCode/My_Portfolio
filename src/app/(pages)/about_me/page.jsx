@@ -25,6 +25,9 @@ import Base from "@/app/Components/Front/Base";
 import { personalInfo, education } from "@/app/data/qui_suis_je.data";
 import { projectsByTechnology } from "@/app/data/projects.data";
 
+import 'react-tooltip/dist/react-tooltip.css'
+import { Tooltip } from 'react-tooltip'
+
 export default function AboutPage() {
   const scrollToEducation = (year) => {
     const ref = educationRefs[year];
@@ -86,13 +89,13 @@ export default function AboutPage() {
 
         {/* Quick Info Column */}
         <div className="bg-[#141b3d] rounded-lg p-6 border border-[#fbbf24]/20 h-fit">
-          <h3 className="text-xl font-semibold text-[#fbbf24] mb-6 text-center">
+          <h3 className="text-2xl font-semibold text-[#fbbf24] mb-6 text-center">
             Informations
           </h3>
           <div className="space-y-4">
             {personalInfo.map((info, index) => (
               <div key={index} className="flex items-start gap-3">
-                <info.icon className="w-5 h-5 text-[#60a5fa] flex-shrink-0 mt-1" />
+                <info.icon className="w-6 h-6 text-[#60a5fa] flex-shrink-0 mt-1" />
                 <div className="flex-1">
                   <p className="text-[#f5e6d3]/60 text-sm">{info.label}</p>
                   {info.link ? (
@@ -105,28 +108,25 @@ export default function AboutPage() {
                       {info.value}
                     </a>
                   ) : (
-                    <p
-                      className="text-[#f5e6d3] text-sm"
-                      {...((info.value.includes("@") ||
-                        info.value.includes("+33")) && {
-                        onClick: () => {
-                          navigator.clipboard.writeText(info.value);
-                        },
-                        title: "Copier dans le presse-papiers",
-                        tabIndex: 0,
-                      })}
-                    >
-                      <span
-                        className={`
+                    <>
+                      <p className="text-[#f5e6d3] text-sm">
+                        <span
+                          className={`
                           ${(info.value.includes("@") ||
-                            info.value.includes("+33")) &&
-                          "hover:text-[#fbbf24] transition-colors cursor-pointer"
-                          }
+                              info.value.includes("+33")) &&
+                            "hover:text-[#fbbf24] transition-colors cursor-pointer"
+                            }
                           `}
-                      >
-                        {info.value}
-                      </span>
-                    </p>
+                          {...((info.value.includes("@") || info.value.includes("+33")) && {
+                            "data-tooltip-id": `tooltip_infos_${index}`,
+                            "data-tooltip-content": "Copier dans le presse-papiers"
+                          })}
+                        >
+                          {info.value}
+                        </span>
+                      </p>
+                      <Tooltip id={`tooltip_infos_${index}`} />
+                    </>
                   )}
                 </div>
               </div>
@@ -140,15 +140,6 @@ export default function AboutPage() {
         <h2 className="text-4xl font-bold text-[#fbbf24] mb-12 text-center">
           Mon Parcours
         </h2>
-
-
-        <button data-tooltip-target="tooltip-default" type="button" className="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Default tooltip</button>
-
-        <div id="tooltip-default" role="tooltip" className="absolute z-10 invisible text-red-500 bg-white tooltip">
-          Tooltip content
-          <div className="tooltip-arrow" data-popper-arrow></div>
-        </div>
-
 
         {/* Timeline Navigation */}
         <div className="flex justify-center gap-4 mb-12">
@@ -241,85 +232,13 @@ export default function AboutPage() {
                         rel="noopener noreferrer"
                         className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer"
                       >
-                        <ExternalLink className="w-5 h-5" />
+                        <ExternalLink className="w-5 h-5" data-tooltip-id={`tooltip_link_${index}`} data-tooltip-content="Voir le projet" />
+                        <Tooltip id={`tooltip_link_${index}`} />
                       </a>
                     ) : (
                       <>
-                        {/* <button
-                          type="button"
-                          data-modal-target={`modal-private-project-${index}`}
-                          data-modal-toggle={`modal-private-project-${index}`}
-                          className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer bg-transparent p-0 border-none outline-none inline-flex"
-                          aria-label="Projet privé - plus d'informations"
-                        > */}
-                        <Lock className="w-5 h-5 text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-not-allowed" />
-                        {/* Modal projet privé */}
-                        {/* </button>
-                          <div
-                            id={`modal-private-project-${index}`}
-                            tabIndex={-1}
-                            aria-hidden="true"
-                            className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
-                          >
-                            <div className="relative p-4 w-full max-w-2xl max-h-full">
-                              <div className="relative bg-[#141b3d] border border-[#fbbf24]/20 rounded-lg shadow-xl p-4 md:p-6">
-                                <div className="flex items-center justify-between border-b border-[#60a5fa]/20 pb-4 md:pb-5">
-                                  <h3 className="text-lg font-medium text-[#fbbf24]">
-                                    Projet privé
-                                  </h3>
-                                  <button
-                                    type="button"
-                                    className="text-[#f5e6d3] bg-transparent hover:bg-[#1e2a5e] hover:text-[#fbbf24] rounded-lg text-sm w-9 h-9 ms-auto inline-flex justify-center items-center transition-colors"
-                                    data-modal-hide={`modal-private-project-${index}`}
-                                  >
-                                    <svg
-                                      className="w-5 h-5"
-                                      aria-hidden="true"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                    >
-                                      <path
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18 17.94 6M18 18 6.06 6"
-                                      />
-                                    </svg>
-                                    <span className="sr-only">Fermer</span>
-                                  </button>
-                                </div>
-                                <div className="space-y-4 py-4 md:py-6">
-                                  <p className="text-[#f5e6d3] font-medium">
-                                    {project.title}
-                                  </p>
-                                  <p className="leading-relaxed text-[#f5e6d3]/80">
-                                    Ce projet est privé, l&apos;établissement en est le
-                                    propriétaire. Contactez-moi pour plus
-                                    d&apos;informations.
-                                  </p>
-                                </div>
-                                <div className="flex border-t border-[#60a5fa]/20 pt-4 md:pt-5 gap-4">
-                                  <Btn
-                                    icon={<MailPlus className={classNameForIcon} />}
-                                    href="/contact_me"
-                                    text="Me contacter"
-                                    size="md"
-                                  />
-                                  <button
-                                    type="button"
-                                    data-modal-hide={`modal-private-project-${index}`}
-                                    className="text-[#f5e6d3] bg-[#1e2a5e] border border-[#60a5fa]/30 hover:bg-[#60a5fa]/10 hover:border-[#fbbf24]/50 rounded-lg px-4 py-2.5 text-sm font-medium transition-all"
-                                  >
-                                    Fermer
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                        </div> */}
+                        <Lock className="w-5 h-5 text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-not-allowed" data-tooltip-id={`tooltip_lock_${index}`} data-tooltip-content="Projet privé, non disponible en ligne." />
+                        <Tooltip id={`tooltip_lock_${index}`} />
                       </>
                     )}
                   </CardTitle>
