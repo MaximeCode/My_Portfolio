@@ -81,7 +81,7 @@ export const projectsByTechnology = [
             {
                 title: "Karl Storz - Endocontact",
                 description: "Projet professionnel réalisé en alternance chez Kiwik. Création d'une nouvelle section dans l'intranet de l'entreprise de location de matériel médical de Karl Storz. Cette section permet de gérer les rapports d'inspection de l'équipement médical. J'ai travaillé sous la directive de mon chef de projet, appliqué les méthodologies agiles et formé le client au fonctionnement de cette nouvelle partie. J'ai modifié la base de données pour gérer toutes les données et les reliées aux clients/utilisateurs/articles médicaux...",
-                image: "hp_ks",
+                image: "hp_karl_storz",
                 technologies: ["Symfony", "PHP", "MySQL", "Twig"],
             }
         ],

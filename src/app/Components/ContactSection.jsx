@@ -7,18 +7,25 @@ import {
   Mail,
   Send,
   CheckCircle2,
+  X,
 } from "lucide-react";
+import { Tooltip } from "react-tooltip";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    message: "",
+    firstName: "Bill",
+    lastName: "Gates",
+    email: "bill.gates@microsoft.com",
+    phone: "+33 6 12 34 56 78",
+    message: "Votre profil m'intéresse, je voudrais en savoir plus sur vos projets. Merci de me recontacter au + vite !!!",
   });
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isFocused, setIsFocused] = useState({});
+
+  // Loading and Error states for contact form
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -27,19 +34,32 @@ export default function ContactSection() {
     });
   };
 
-  const handleSubmit = (e) => {
+  // Remplace la fonction handleSubmit existante
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        message: "",
+    setIsLoading(true);
+    setIsError(false);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-    }, 3000);
+
+      const result = await response.json();
+
+      if (result.success) {
+        setIsSubmitted(true);
+        setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+      } else {
+        setIsError(true);
+      }
+    } catch {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleFocus = (field) => {
@@ -48,6 +68,10 @@ export default function ContactSection() {
 
   const handleBlur = (field) => {
     setIsFocused({ ...isFocused, [field]: false });
+  };
+
+  const handleClose = () => {
+    setIsSubmitted(false);
   };
 
   return (
@@ -66,13 +90,42 @@ export default function ContactSection() {
         <div className="lg:col-span-2">
           <div className="h-full bg-bg-accent/40 backdrop-blur-sm rounded-2xl p-8 border border-muted/30 shadow-2xl">
             {isSubmitted ? (
-              <div className="text-center py-16 animate-fadeIn">
-                <CheckCircle2 className="w-20 h-20 text-secondary mx-auto mb-6 animate-bounce" />
-                <h3 className="text-3xl font-bold text-foreground mb-4">
+              <div className="flex flex-col items-center justify-center py-12 px-6 animate-fadeIn relative">
+                {/* Croix pour fermer le message */}
+                <button className="absolute top-4 right-4 border-2 border-foreground/40 rounded-2xl p-2 text-foreground/40 hover:text-foreground transition-colors duration-300 cursor-pointer">
+                  <X className="w-6 h-6" onClick={() => handleClose()} />
+                </button>
+                {/* Icône animée */}
+                <div className="relative mb-8 transition-colors duration-300">
+                  <div className="w-24 h-24 rounded-full bg-secondary/10 flex items-center justify-center transition-colors duration-300">
+                    <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center transition-colors duration-300">
+                      <CheckCircle2 className="w-10 h-10 text-secondary transition-colors duration-300" />
+                    </div>
+                  </div>
+                  {/* Halo animé */}
+                  <div className="absolute inset-0 rounded-full border-2 border-secondary/30 animate-ping transition-colors duration-300" />
+                </div>
+
+                {/* Titre */}
+                <h3 className="text-3xl font-bold text-foreground mb-3">
                   Message envoyé !
                 </h3>
-                <p className="text-foreground/70 text-lg">
-                  Je vous répondrai dans les plus brefs délais.
+
+                {/* Sous-titre */}
+                <p className="text-foreground/60 text-base text-center max-w-sm mb-8">
+                  Merci pour votre message. Je vous répondrai dans les plus brefs délais.
+                </p>
+
+                {/* Séparateur décoratif */}
+                <div className="flex items-center gap-3 w-full max-w-xs">
+                  <div className="flex-1 h-px bg-secondary/20" />
+                  <div className="w-2 h-2 rounded-full bg-secondary/50" />
+                  <div className="flex-1 h-px bg-secondary/20" />
+                </div>
+
+                {/* Info délai */}
+                <p className="mt-6 text-foreground/40 text-sm text-center">
+                  Temps de réponse habituel · <span className="text-secondary/70">Moins de 24h !</span>
                 </p>
               </div>
             ) : (
@@ -196,27 +249,38 @@ export default function ContactSection() {
                   />
                 </div>
 
-                {/* Legal */}
-                {/* <p className="text-foreground/50 text-sm">
-                  En soumettant ce formulaire, vous acceptez nos{" "}
-                  <span className="text-secondary hover:text-primary transition-colors cursor-pointer">
-                    conditions générales
-                  </span>{" "}
-                  et notre{" "}
-                  <span className="text-secondary hover:text-primary transition-colors cursor-pointer">
-                    politique de confidentialité
-                  </span>
-                  .
-                </p> */}
+                {/* Juste avant le bouton "Envoyer le message" */}
+                {isError && (
+                  <p className="text-red-400 text-sm text-center">
+                    Une erreur est survenue. Veuillez réessayer ou me contacter directement par téléphone ou email.<br />
+                    N'hésitez pas à créer une issue sur le <a href="https://github.com/MaximeCode/My_Portfolio/issues" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-primary transition-colors cursor-pointer">repository GitHub</a> de mon Portfolio pour me signaler l'erreur.
+                  </p>
+                )}
 
                 {/* Submit Button */}
                 <button
                   onClick={handleSubmit}
-                  className="group w-full bg-gradient-to-r from-secondary to-secondary-accent text-background font-semibold px-8 py-4 rounded-xl hover:shadow-2xl hover:shadow-secondary/50 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3"
+                  disabled={isLoading}
+                  className="group w-full bg-gradient-to-r from-secondary to-secondary-accent text-background font-semibold px-8 py-4 rounded-xl hover:shadow-2xl hover:shadow-secondary/50 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 cursor-pointer"
                 >
-                  <span className="text-lg">Envoyer le message</span>
-                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  {isLoading ? (
+                    // Remplace le contenu du bouton pendant l'envoi
+                    <span className="text-lg">Envoi en cours...</span>
+                  ) : (
+                    <>
+                      <span className="text-lg">Envoyer le message</span>
+                      <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    </>
+                  )}
                 </button>
+
+                {/* Mention RGPD — à ajouter juste après le bouton submit */}
+                <p className="text-foreground/40 text-xs text-center mt-4">
+                  Les données collectées sont utilisées uniquement pour répondre à votre message et ne sont pas transmises à des tiers.{" "}
+                  <a href="/mentions-legales" className="text-secondary/60 cursor-pointer hover:text-secondary transition-colors">
+                    En savoir plus
+                  </a>
+                </p>
               </div>
             )}
           </div>
@@ -272,9 +336,12 @@ export default function ContactSection() {
             <a
               className="text-primary text-lg font-semibold hover:text-secondary transition-colors duration-300"
               href="tel:+33762171177"
+              data-tooltip-id="tooltip_phone"
+              data-tooltip-content="Copier dans le presse-papiers"
             >
               07 62 17 11 77
             </a>
+            <Tooltip id="tooltip_phone" />
           </div>
         </div>
       </div>
@@ -307,6 +374,6 @@ export default function ContactSection() {
       {/* Decorative Elements */}
       <div className="fixed top-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
       <div className="fixed bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
-    </div>
+    </div >
   );
 }
