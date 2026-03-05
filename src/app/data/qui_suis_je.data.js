@@ -1,14 +1,15 @@
 import { User, Calendar, Mail, Phone, MapPin, GraduationCap, Github } from "lucide-react";
+import { siteOwner, contact, social, location } from "./site.config";
 
 export const personalInfo = [
-    { icon: User, label: "Nom", value: "Maxime BAUDE" },
+    { icon: User, label: "Nom", value: siteOwner.fullName },
     { icon: Calendar, label: "Âge", value: "20 ans" },
-    { icon: Mail, label: "Email", value: "contact.mbaude@gmail.com" },
-    { icon: Phone, label: "Téléphone", value: "+33 7 62 17 11 77" },
+    { icon: Mail, label: "Email", value: contact.email, link: `mailto:${contact.email}` },
+    { icon: Phone, label: "Téléphone", value: contact.phoneDisplay, link: `tel:${contact.phoneHref}` },
     {
         icon: MapPin,
         label: "Localisation",
-        value: "Orléans (45), Chartres (28) France",
+        value: location,
     },
     {
         icon: GraduationCap,
@@ -18,8 +19,8 @@ export const personalInfo = [
     {
         icon: Github,
         label: "GitHub",
-        value: "github.com/MaximeCode",
-        link: "https://github.com/MaximeCode",
+        value: social.githubUrl.replace("https://", ""),
+        link: social.githubUrl,
     },
 ];
 

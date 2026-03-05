@@ -1,15 +1,36 @@
 import Base from "@/app/Components/Front/Base";
 import Title from "@/app/Components/Front/Title";
+import { siteOwner, contact, legal } from "@/app/data/site.config";
 
 export const metadata = {
   title: "Mentions légales",
-  description: "Mentions légales du portfolio de Maxime BAUDE",
+  description: `Mentions légales du portfolio de ${siteOwner.fullName}`,
+};
+
+const legalInfo = {
+  ...siteOwner,
+  ...legal,
+  emailAddress: contact.email,
+  phoneNumber: contact.phoneDisplay,
+  postalAddress: contact.postalAddress,
 };
 
 export default function MentionsLegales() {
+  const {
+    firstName,
+    lastName,
+    fullName,
+    status,
+    siretNumber,
+    postalAddress,
+    emailAddress,
+    phoneNumber,
+    lastUpdated,
+  } = legalInfo;
+
   return (
     <Base>
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6">
         <Title text="Mentions légales" />
 
         <p className="text-foreground/80 text-lg max-w-3xl mx-auto text-center mb-16">
@@ -26,19 +47,18 @@ export default function MentionsLegales() {
               1. Éditeur du site
             </h2>
             <p className="text-foreground/90 leading-relaxed">
-              <strong className="text-foreground">Nom :</strong> {"{prénom}"}{" "}
-              {"{nom}"}
+              <strong className="text-foreground">Nom :</strong> {firstName}{" "}
+              {lastName}
               <br />
-              <strong className="text-foreground">Statut :</strong>{" "}
-              Étudiant / Freelance
+              <strong className="text-foreground">Statut :</strong> {status}
               <br />
-              <strong className="text-foreground">SIRET :</strong> {"{numéro SIRET}"}
+              <strong className="text-foreground">SIRET :</strong> {siretNumber}
               <br />
-              <strong className="text-foreground">Adresse :</strong> {"{adresse postale}"}
+              <strong className="text-foreground">Adresse :</strong> {postalAddress}
               <br />
-              <strong className="text-foreground">Email :</strong> {"{adresse email}"}
+              <strong className="text-foreground">Email :</strong> {emailAddress}
               <br />
-              <strong className="text-foreground">Téléphone :</strong> {"{numéro de téléphone}"}
+              <strong className="text-foreground">Téléphone :</strong> {phoneNumber}
             </p>
           </div>
 
@@ -72,7 +92,7 @@ export default function MentionsLegales() {
             </h2>
             <p className="text-foreground/90 leading-relaxed">
               L&apos;ensemble du contenu de ce site (textes, images, visuels,
-              logo, structure) est la propriété exclusive de {"{prénom}"} {"{nom}"}
+              logo, structure) est la propriété exclusive de {fullName}
               , sauf mention contraire explicite. Toute reproduction,
               distribution, modification ou utilisation de ces contenus, sous
               quelque forme que ce soit, sans autorisation écrite préalable, est
@@ -116,7 +136,7 @@ export default function MentionsLegales() {
             <p className="text-foreground/90 leading-relaxed">
               Pour exercer ces droits, vous pouvez contacter le responsable du
               traitement à l&apos;adresse suivante :{" "}
-              <strong className="text-foreground">{"{adresse email}"}</strong>
+              <strong className="text-foreground">{emailAddress}</strong>
             </p>
           </div>
 
@@ -139,7 +159,7 @@ export default function MentionsLegales() {
             </h2>
             <p className="text-foreground/90 leading-relaxed">
               Ce site peut contenir des liens vers des sites externes (LinkedIn,
-              GitHub, etc.). {"{prénom}"} {"{nom}"} ne peut être tenu responsable
+              GitHub, etc.). {fullName} ne peut être tenu responsable
               du contenu de ces sites tiers ni de leur politique de
               confidentialité.
             </p>
@@ -152,7 +172,7 @@ export default function MentionsLegales() {
             </h2>
             <p className="text-foreground/90 leading-relaxed">
               Les informations contenues sur ce site sont fournies à titre
-              indicatif. {"{prénom}"} {"{nom}"} s&apos;efforce de maintenir ces
+              indicatif. {fullName} s&apos;efforce de maintenir ces
               informations à jour et exactes, mais ne peut garantir leur
               exhaustivité ni leur parfaite actualité. La responsabilité du site
               ne saurait être engagée en cas d&apos;erreur, d&apos;omission ou
@@ -174,7 +194,7 @@ export default function MentionsLegales() {
         </div>
 
         <p className="text-foreground/50 text-sm text-center mt-12 italic">
-          Dernière mise à jour : {"{date de mise à jour}"}
+          Dernière mise à jour : {lastUpdated}
         </p>
       </main>
     </Base>

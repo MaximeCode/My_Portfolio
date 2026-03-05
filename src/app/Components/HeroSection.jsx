@@ -5,11 +5,12 @@ import LeftColumn from "./LeftColumn";
 import BtnDownloadCV from "./Front/BtnDownloadCV";
 import Btn from "./Front/Btn";
 import { classNameForIcon } from "@/app/layout";
+import { siteOwner } from "@/app/data/site.config";
 
 export default function HeroSection() {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const text = "Maxime BAUDE";
+  const text = siteOwner.fullName;
   const [displayCursor, setDisplayCursor] = useState(true);
 
   useEffect(() => {

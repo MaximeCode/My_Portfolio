@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ma_pdp } from "@/app/layout";
+import { siteOwner } from "@/app/data/site.config";
 
 export default function Navbar() {
   const menuItems = [
@@ -57,7 +58,7 @@ export default function Navbar() {
             <div className="w-full h-full bg-[#1e2a5e]/50 flex items-center justify-center">
               <Image
                 src={ma_pdp}
-                alt="Portrait de Maxime BAUDE"
+                alt={`Portrait de ${siteOwner.fullName}`}
                 width={320}
                 height={320}
                 className="w-full h-full object-cover"

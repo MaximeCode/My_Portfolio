@@ -1,4 +1,5 @@
 import { Linkedin, Github } from "lucide-react";
+import { social } from "./site.config";
 
 export const mySocialMedias = [
     {
@@ -6,13 +7,13 @@ export const mySocialMedias = [
         icon: (
             <Linkedin className="w-12 h-12 text-[#60a5fa] transition-all duration-500 group-hover:text-[#fbbf24] relative z-10" />
         ),
-        url: "https://linkedin.com/in/maximebaude/",
+        url: social.linkedinUrl,
     },
     {
         name: "GitHub",
         icon: (
             <Github className="w-12 h-12 text-[#60a5fa] transition-all duration-500 group-hover:text-[#fbbf24] relative z-10" />
         ),
-        url: "https://github.com/maximecode",
+        url: social.githubUrl,
     },
 ];

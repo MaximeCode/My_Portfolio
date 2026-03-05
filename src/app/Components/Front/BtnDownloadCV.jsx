@@ -1,4 +1,5 @@
 import { Download } from "lucide-react";
+import { cvPath } from "@/app/data/site.config";
 
 export default function BtnDownloadCV({ size = "lg" }) {
   const padding =
@@ -7,8 +8,8 @@ export default function BtnDownloadCV({ size = "lg" }) {
     // Download CV Button
     <a
       download
-      filename="/docs/CV-Maxime_BAUDE.pdf"
-      href="/docs/CV-Maxime_BAUDE.pdf"
+      filename={cvPath}
+      href={cvPath}
       className={`cursor-pointer animate-scale-in group inline-flex items-center gap-3 ${padding} bg-gradient-to-r from-[#fbbf24] to-[#60a5fa] text-[#0a0e27] font-semibold rounded-full hover:shadow-2xl hover:shadow-[#60a5fa]/50 transition-all duration-300 hover:scale-105 w-fit`}
       target="_blank"
       rel="noopener noreferrer"

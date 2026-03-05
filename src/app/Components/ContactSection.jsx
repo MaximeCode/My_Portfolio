@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { mySocialMedias } from "@/app/data/contact.data";
+import { contact, social } from "@/app/data/site.config";
 import {
   Building2,
   MapPin,
@@ -253,7 +254,7 @@ export default function ContactSection() {
                 {isError && (
                   <p className="text-red-400 text-sm text-center">
                     Une erreur est survenue. Veuillez réessayer ou me contacter directement par téléphone ou email.<br />
-                    N'hésitez pas à créer une issue sur le <a href="https://github.com/MaximeCode/My_Portfolio/issues" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-primary transition-colors cursor-pointer">repository GitHub</a> de mon Portfolio pour me signaler l'erreur.
+                    N'hésitez pas à créer une issue sur le <a href={`${social.portfolioRepoUrl}/issues`} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-primary transition-colors cursor-pointer">repository GitHub</a> de mon Portfolio pour me signaler l'erreur.
                   </p>
                 )}
 
@@ -335,11 +336,11 @@ export default function ContactSection() {
             </p>
             <a
               className="text-primary text-lg font-semibold hover:text-secondary transition-colors duration-300"
-              href="tel:+33762171177"
+              href={`tel:${contact.phoneHref}`}
               data-tooltip-id="tooltip_phone"
               data-tooltip-content="Copier dans le presse-papiers"
             >
-              07 62 17 11 77
+              {contact.phoneDisplay}
             </a>
             <Tooltip id="tooltip_phone" />
           </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ma_grosse_tete } from "@/app/layout";
+import { siteOwner } from "@/app/data/site.config";
 
 export default function LeftColumn() {
   return (
@@ -12,7 +13,7 @@ export default function LeftColumn() {
             <div className="w-full h-full bg-[#1e2a5e]/30 flex items-center justify-center">
               <Image
                 src={ma_grosse_tete}
-                alt="Portrait de Maxime BAUDE"
+                alt={`Portrait de ${siteOwner.fullName}`}
                 width={320}
                 height={320}
               />
