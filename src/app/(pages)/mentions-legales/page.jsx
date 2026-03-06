@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Base from "@/app/Components/Front/Base";
 import Title from "@/app/Components/Front/Title";
 import { siteOwner, contact, legal } from "@/app/data/site.config";
@@ -133,10 +134,20 @@ export default function MentionsLegales() {
               <li>Droit d&apos;opposition</li>
               <li>Droit à la limitation du traitement</li>
             </ul>
-            <p className="text-foreground/90 leading-relaxed">
+            <p className="text-foreground/90 leading-relaxed mb-4">
               Pour exercer ces droits, vous pouvez contacter le responsable du
               traitement à l&apos;adresse suivante :{" "}
               <strong className="text-foreground">{emailAddress}</strong>
+            </p>
+            <p className="text-foreground/90 leading-relaxed">
+              Pour plus de détails sur le traitement de vos données, consultez la{" "}
+              <Link
+                href="/politique-confidentialite"
+                className="text-secondary hover:text-primary transition-colors duration-300 underline underline-offset-2"
+              >
+                Politique de confidentialité
+              </Link>
+              .
             </p>
           </div>
 

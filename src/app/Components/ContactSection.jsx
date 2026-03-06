@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import { mySocialMedias } from "@/app/data/contact.data";
 import { contact, social } from "@/app/data/site.config";
 import {
@@ -278,9 +279,9 @@ export default function ContactSection() {
                 {/* Mention RGPD — à ajouter juste après le bouton submit */}
                 <p className="text-foreground/40 text-xs text-center mt-4">
                   Les données collectées sont utilisées uniquement pour répondre à votre message et ne sont pas transmises à des tiers.{" "}
-                  <a href="/mentions-legales" className="text-secondary/60 cursor-pointer hover:text-secondary transition-colors">
+                  <Link href="/politique-confidentialite" className="text-secondary/60 cursor-pointer hover:text-secondary transition-colors">
                     En savoir plus
-                  </a>
+                  </Link>
                 </p>
               </div>
             )}
