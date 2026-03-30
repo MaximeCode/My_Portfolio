@@ -22,7 +22,11 @@ import { classNameForIcon } from "@/app/layout";
 import Title from "@/app/Components/Front/Title";
 import Base from "@/app/Components/Front/Base";
 
-import { personalInfo, education } from "@/app/data/qui_suis_je.data";
+import {
+  aboutMeParagraphs,
+  personalInfo,
+  education,
+} from "@/app/data/qui_suis_je.data";
 import { projectsByTechnology } from "@/app/data/projects.data";
 
 import 'react-tooltip/dist/react-tooltip.css'
@@ -65,26 +69,13 @@ export default function AboutPage() {
         {/* Description Column */}
         <div className="lg:col-span-2 text-justify">
           <Title text="Qui suis-je ?" />
-          <p className="text-[#f5e6d3] mb-4 text-lg">
-            Passionné par le développement web depuis plus de 5 ans, j&apos;ai
-            eu l&apos;opportunité de travailler sur de nombreux projets variés,
-            allant de sites vitrines élégants à des applications web complexes
-            en passant par des sites e-commerce. Mon approche combine créativité
-            et rigueur technique pour offrir des solutions performantes et
-            esthétiques.
-          </p>
-          <p className="text-[#f5e6d3] mb-4 text-lg">
-            Je me spécialise dans le développement front-end avec React et
-            Next.JS, tout en maîtrisant également le back-end avec Node.js. Mon
-            objectif est toujours de créer des expériences utilisateur fluides
-            et intuitives qui répondent aux besoins réels des utilisateurs.
-          </p>
-          <p className="text-[#f5e6d3] text-lg">
-            Curieux de nature, je me tiens constamment à jour des dernières
-            technologies et tendances du web. J&apos;aime relever de nouveaux
-            défis et collaborer avec des équipes dynamiques pour transformer des
-            idées en produits concrets et impactants.
-          </p>
+          <div className="flex flex-col gap-4">
+            {aboutMeParagraphs.map((paragraph, index) => (
+              <p key={index} className="text-[#f5e6d3] text-lg">
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
 
         {/* Quick Info Column */}
@@ -160,20 +151,20 @@ export default function AboutPage() {
         {/* Timeline */}
         <div className="relative max-w-6xl mx-auto">
           {/* Vertical Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 mx-auto bg-gradient-to-b from-[#60a5fa] via-[#fbbf24] to-[#60a5fa]" />
+          <div className="absolute right-4 lg:right-auto lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#60a5fa] via-[#fbbf24] to-[#60a5fa]" />
 
           {education.map((edu, index) => (
             <div
               key={index}
               ref={educationRefs[edu.year]}
-              className={`relative mb-12 md:mb-16 ${index % 2 === 0
-                ? "pr-12 mr-auto text-right"
-                : "pl-12 ml-auto text-left"
-                } w-1/2`}
+              className={`relative mb-12 md:mb-16 w-full pr-10 text-left ${index % 2 === 0
+                ? "lg:w-1/2 lg:pr-12 lg:mr-auto lg:text-right"
+                : "lg:w-1/2 lg:pl-12 lg:pr-0 lg:ml-auto lg:text-left"
+                }`}
             >
               {/* Timeline Dot */}
               <div
-                className={`absolute top-0 w-4 h-4 bg-[#fbbf24] rounded-full border-4 border-[#0a0e27] ${index % 2 === 0 ? "-right-2" : "-left-2"
+                className={`absolute top-0 right-[0.5rem] lg:right-auto w-4 h-4 bg-[#fbbf24] rounded-full border-4 border-[#0a0e27] ${index % 2 === 0 ? "xl:-right-2" : "xl:-left-2"
                   }`}
               />
 

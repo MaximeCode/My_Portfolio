@@ -1,6 +1,12 @@
 import { User, Calendar, Mail, Phone, MapPin, GraduationCap, Github } from "lucide-react";
 import { siteOwner, contact, social, location } from "./site.config";
 
+export const aboutMeParagraphs = [
+    "Passionné par le développement web depuis plus de 5 ans, j'ai eu l'opportunité de travailler sur de nombreux projets variés, allant de sites vitrines élégants à des applications web complexes en passant par des sites e-commerce. Mon approche combine créativité et rigueur technique pour offrir des solutions performantes et esthétiques.",
+    "Je me spécialise dans le développement front-end avec React et Next.JS, tout en maîtrisant également le back-end avec Node.js. Mon objectif est toujours de créer des expériences utilisateur fluides et intuitives qui répondent aux besoins réels des utilisateurs.",
+    "Curieux de nature, je me tiens constamment à jour des dernières technologies et tendances du web. J'aime relever de nouveaux défis et collaborer avec des équipes dynamiques pour transformer des idées en produits concrets et impactants.",
+];
+
 export const personalInfo = [
     { icon: User, label: "Nom", value: siteOwner.fullName },
     { icon: Calendar, label: "Âge", value: "20 ans" },
