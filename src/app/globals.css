@@ -149,7 +149,7 @@ p {
 }
 
 .animate-nav {
-  animation: slideInDown 0.5s ease-out 0.5s forwards;
+  animation: slideInDown 0.5s ease-out 0s forwards;
   opacity: 0;
 }
 

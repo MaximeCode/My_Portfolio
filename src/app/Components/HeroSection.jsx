@@ -28,7 +28,7 @@ export default function HeroSection() {
   return (
     <>
       <section className="container mx-auto px-4 md:px-6 py-20 min-h-screen flex items-center">
-        <div className="w-full flex flex-col lg:flex-row gap-16 items-center">
+        <div className="w-full flex flex-col lg:flex-row gap-8 md:gap-16 items-center">
           <LeftColumn />
           {/* Right Side - Introduction (2/3 width) */}
           <div className="lg:w-2/3 flex flex-col gap-8">
@@ -74,15 +74,16 @@ export default function HeroSection() {
               </p>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+            <div className="flex md:flex-row gap-4 md:gap-8">
               {/* Voir mes réalisations */}
               <Btn
                 icon={<Eye className={classNameForIcon} />}
                 text="Voir mes réalisations"
                 href="/my_projects"
+                size="md"
               />
 
-              <BtnDownloadCV />
+              <BtnDownloadCV size="md" />
             </div>
           </div>
         </div>
