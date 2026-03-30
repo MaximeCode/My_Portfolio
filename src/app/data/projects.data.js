@@ -14,19 +14,37 @@ export const projectsByTechnology = [
                 link: "https://albabadminton.fr",
                 github: "https://github.com/MaximeCode/alba_badminton",
                 fav: true,
+            }, {
+                title: "Site vitrine pour le club de badminton de lucé (28)",
+                description:
+                    "En freelance, j'ai développé le site vitrine pour le club de badminton de lucé (28), avec WordPress pour une administration plus simple pour les dirigeants du club. Ce site est hébergé sur un serveur mutualisé chez OVH et est optimisé pour les moteurs de recherche grâce à du référencement naturel.",
+                technologies: ["WordPress", "PHP", "Apache", "MySQL"],
+                image: "hp_alba",
+                link: "https://albabadminton.fr",
+                github: "https://github.com/MaximeCode/alba_badminton",
+                fav: true,
+            }, {
+                title: "Site vitrine pour le club de badminton de lucé (28)",
+                description:
+                    "En freelance, j'ai développé le site vitrine pour le club de badminton de lucé (28), avec WordPress pour une administration plus simple pour les dirigeants du club. Ce site est hébergé sur un serveur mutualisé chez OVH et est optimisé pour les moteurs de recherche grâce à du référencement naturel.",
+                technologies: ["WordPress", "PHP", "Apache", "MySQL"],
+                image: "hp_alba",
+                link: "https://albabadminton.fr",
+                github: "https://github.com/MaximeCode/alba_badminton",
+                fav: true,
             },
-            // {
-            //     title: "Site vitrine pour le club de badminton d'Orléans (45)",
-            //     description:
-            //         "Refonte fonctionnelle et visuelle du site vitrine du club de badminton d'Orléans (45) dont je suis adhérent.",
-            //     technologies: [],
-            //     image: "Logo_CLTO",
-            //     link: "",
-            //     github: "",
-            //     fav: true,
-            //     in_progress: true,
-            //     object_classes: "object-center object-contain"
-            // },
+            {
+                title: "Site vitrine pour le club de badminton d'Orléans (45)",
+                description:
+                    "Refonte fonctionnelle et visuelle du site vitrine du club de badminton d'Orléans (45) dont je suis adhérent.",
+                technologies: [],
+                image: "Logo_CLTO",
+                link: "",
+                github: "",
+                fav: true,
+                in_progress: true,
+                object_classes: "object-center object-contain"
+            },
         ],
     },
     {
