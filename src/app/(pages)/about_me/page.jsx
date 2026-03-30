@@ -1,15 +1,6 @@
 "use client";
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
-import {
   Eye,
   ExternalLink,
   Lock,
@@ -18,6 +9,7 @@ import {
 import { useRef } from "react";
 import BtnDownloadCV from "@/app/Components/Front/BtnDownloadCV";
 import Btn from "@/app/Components/Front/Btn";
+import ProjectCard from "@/app/Components/ProjectCard";
 import { classNameForIcon } from "@/app/layout";
 import Title from "@/app/Components/Front/Title";
 import Base from "@/app/Components/Front/Base";
@@ -194,29 +186,16 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projectsFavorites.map((project, index) => (
             <div key={index}>
-              <Card className="pt-0 bg-[#141b3d] border-[#fbbf24]/20 overflow-hidden h-full hover:border-[#60a5fa]/50 transition-all duration-300">
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={`/img/${project.image}.png`}
-                    alt={project.title}
-                    width={1080}
-                    height={500}
-                    className={`w-full h-full ${project.object_classes || "object-top object-cover"} transition-transform duration-500 hover:scale-110`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/20 to-transparent"></div>
-                  {project.in_progress && (
-                    <Badge
-                      variant="outline"
-                      className="bg-[#60a5fa] text-white text-xs border-[#60a5fa] absolute top-3 right-3 z-10"
-                    >
-                      EN COURS DE D&Eacute;VELOPPEMENT
-                    </Badge>
-                  )}
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-[#f5e6d3] flex items-center justify-between">
-                    {project.title}
-                    {project.link ? (
+              <ProjectCard
+                project={project}
+                cardClassName="pt-0 bg-[#141b3d] border-[#fbbf24]/20 overflow-hidden h-full hover:border-[#60a5fa]/50 transition-all duration-300"
+                imageClassName={`w-full h-full ${project.object_classes || "object-top object-cover"} transition-transform duration-500 hover:scale-110`}
+                  imageOverlayClassName="absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/20 to-transparent"
+                showInProgressBadge
+                inProgressBadgeText="EN COURS DE DÉVELOPPEMENT"
+                titleAction={
+                  project.link ? (
+                    <>
                       <a
                         href={project.link}
                         target="_blank"
@@ -224,33 +203,17 @@ export default function AboutPage() {
                         className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer"
                       >
                         <ExternalLink className="w-5 h-5" data-tooltip-id={`tooltip_link_${index}`} data-tooltip-content="Voir le projet" />
-                        <Tooltip id={`tooltip_link_${index}`} />
-                      </a>
+                                              </a>
+<Tooltip id={`tooltip_link_${index}`} />
+                    </>
                     ) : (
                       <>
                         <Lock className="w-5 h-5 text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-not-allowed" data-tooltip-id={`tooltip_lock_${index}`} data-tooltip-content="Projet privé, non disponible en ligne." />
                         <Tooltip id={`tooltip_lock_${index}`} />
                       </>
-                    )}
-                  </CardTitle>
-                  <CardDescription className="text-[#f5e6d3]/70">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, techIndex) => (
-                      <Badge
-                        key={techIndex}
-                        variant="outline"
-                        className="bg-[#fbbf24]/10 text-[#fbbf24] border-[#fbbf24]/30"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                    )
+                }
+              />
             </div>
           ))}
         </div>
