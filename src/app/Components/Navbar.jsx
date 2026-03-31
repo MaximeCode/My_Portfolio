@@ -75,7 +75,7 @@ export default function Navbar() {
         )}
 
         {/* Desktop Navigation Items */}
-        <div className="hidden lg:flex flex-1 justify-evenly items-center gap-4 xl:gap-8">
+        <div className="hidden lg:flex flex-1 justify-evenly items-center gap-4 xl:gap-8 max-w-4xl mx-auto">
           {menuItems.map((item) => (
             <Link
               href={item.href}
