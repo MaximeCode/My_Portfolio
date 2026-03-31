@@ -13,6 +13,14 @@ import ProjectCard from "@/app/Components/ProjectCard";
 import { classNameForIcon } from "@/app/layout";
 import Title from "@/app/Components/Front/Title";
 import Base from "@/app/Components/Front/Base";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
+import { motion } from "motion/react";
 
 import {
   aboutMeParagraphs,
@@ -183,40 +191,55 @@ export default function AboutPage() {
         <h2 className="text-4xl font-bold text-[#fbbf24] mb-8 text-center">
           Mes Projets Favoris
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projectsFavorites.map((project, index) => (
-            <div key={index}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="2xl:w-full w-11/12 mx-auto"
+          >
+            <CarouselContent>
+          {projectsFavorites.map((project, projectIndex) => (
+            <CarouselItem
+                  key={projectIndex}
+                  className="md:basis-1/2 lg:basis-1/3"
+                >
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: projectIndex * 0.1,
+                    }}
+                    className="h-full"
+                  >
               <ProjectCard
                 project={project}
-                cardClassName="pt-0 bg-[#141b3d] border-[#fbbf24]/20 overflow-hidden h-full hover:border-[#60a5fa]/50 transition-all duration-300"
-                imageClassName={`w-full h-full ${project.object_classes || "object-top object-cover"} transition-transform duration-500 hover:scale-110`}
-                  imageOverlayClassName="absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/20 to-transparent"
-                showInProgressBadge
-                inProgressBadgeText="EN COURS DE DÉVELOPPEMENT"
-                titleAction={
-                  project.link ? (
-                    <>
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer"
-                      >
-                        <ExternalLink className="w-5 h-5" data-tooltip-id={`tooltip_link_${index}`} data-tooltip-content="Voir le projet" />
-                                              </a>
-<Tooltip id={`tooltip_link_${index}`} />
-                    </>
-                    ) : (
-                      <>
-                        <Lock className="w-5 h-5 text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-not-allowed" data-tooltip-id={`tooltip_lock_${index}`} data-tooltip-content="Projet privé, non disponible en ligne." />
-                        <Tooltip id={`tooltip_lock_${index}`} />
-                      </>
-                    )
-                }
-              />
+                cardClassName="bg-[#141b3d] border-[#fbbf24]/20 overflow-hidden h-full pt-0 hover:border-[#60a5fa]/50 transition-all duration-300 group"
+                imageClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  imageOverlayClassName="absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/40 to-transparent"
+                showFavoriteBadge
+                      showOverlayLinks
+                      enableDescriptionToggle
+                      descriptionMaxChars={400}
+                    />
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex 2xl:-left-24 lg:-left-16 md:-left-12 bg-[#141b3d] border-[#60a5fa]/30 text-[#60a5fa] hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24]" /                      >
+                        <CarouselNext className="hidden md:flex 2xl:-right-24 lg:-right-16 md:-right-12 bg-[#141b3d] border-[#60a5fa]/30 text-[#60a5fa] hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24]" />
+
+            <div className="flex md:hidden justify-center mt-4 gap-4">
+              <CarouselPrevious className="bg-[#141b3d] border-[#60a5fa]/30 text-[#60a5fa] hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24]" />
+              <CarouselNext className="bg-[#141b3d] border-[#60a5fa]/30 text-[#60a5fa] hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24]" />
             </div>
-          ))}
-        </div>
+          </Carousel>
+        </motion.div>
 
         <div className="flex justify-center mt-12">
           <Btn
