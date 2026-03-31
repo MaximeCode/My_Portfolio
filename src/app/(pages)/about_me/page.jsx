@@ -2,8 +2,6 @@
 
 import {
   Eye,
-  ExternalLink,
-  Lock,
   MailPlus,
 } from "lucide-react";
 import { useRef } from "react";
@@ -64,14 +62,15 @@ export default function AboutPage() {
 
   return (
     <Base>
+      <Title className="block lg:hidden" text="Qui suis-je ?" />
       {/* Two Columns Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-14 md:gap-8 mb-20">
         {/* Description Column */}
-        <div className="lg:col-span-2 text-justify">
-          <Title text="Qui suis-je ?" />
+        <div className="xl:col-span-2 text-justify">
+          <Title className="hidden lg:block" text="Qui suis-je ?" />
           <div className="flex flex-col gap-4">
             {aboutMeParagraphs.map((paragraph, index) => (
-              <p key={index} className="text-[#f5e6d3] text-lg">
+              <p key={index} className="text-[#f5e6d3] lg:text-lg">
                 {paragraph}
               </p>
             ))}
@@ -79,7 +78,7 @@ export default function AboutPage() {
         </div>
 
         {/* Quick Info Column */}
-        <div className="bg-[#141b3d] rounded-lg p-6 border border-[#fbbf24]/20 h-fit">
+        <div className="w-full max-w-md mx-auto bg-[#141b3d] rounded-lg p-4 lg:p-6 border border-[#fbbf24]/20 h-fit my-auto">
           <h3 className="text-2xl font-semibold text-[#fbbf24] mb-6 text-center">
             Informations
           </h3>
@@ -133,7 +132,7 @@ export default function AboutPage() {
         </h2>
 
         {/* Timeline Navigation */}
-        <div className="flex justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           {Object.keys(educationRefs)
             .reverse()
             .map((year) => (
@@ -141,7 +140,7 @@ export default function AboutPage() {
                 type="button"
                 key={year}
                 onClick={() => scrollToEducation(year)}
-                className="cursor-pointer px-6 py-2 bg-[#141b3d] border border-[#60a5fa]/30 text-[#60a5fa] rounded-full hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24] transition-all duration-300"
+                className="cursor-pointer shrink-0 px-6 py-2 bg-[#141b3d] border border-[#60a5fa]/30 text-[#60a5fa] rounded-full hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24] transition-all duration-300"
               >
                 {year}
               </button>
@@ -169,7 +168,7 @@ export default function AboutPage() {
               />
 
               {/* Content Card */}
-              <div className="bg-[#141b3d] p-6 rounded-lg border border-[#60a5fa]/20 hover:border-[#fbbf24]/50 transition-all duration-300">
+              <div className="bg-[#141b3d] p-3 md:p-6 rounded-lg border border-[#60a5fa]/20 hover:border-[#fbbf24]/50 transition-all duration-300">
                 <div className="inline-block px-4 py-1 bg-[#fbbf24]/20 text-[#fbbf24] rounded-full mb-4">
                   {edu.year}
                 </div>
@@ -177,7 +176,7 @@ export default function AboutPage() {
                   {edu.degree}
                 </h3>
                 <p className="text-[#60a5fa] mb-3">{edu.school}</p>
-                <p className="text-[#f5e6d3]/70 text-justify">
+                <p className="text-[#f5e6d3]/70 text-justify text-sm md:text-base">
                   {edu.description}
                 </p>
               </div>
@@ -203,8 +202,8 @@ export default function AboutPage() {
             className="2xl:w-full w-11/12 mx-auto"
           >
             <CarouselContent>
-          {projectsFavorites.map((project, projectIndex) => (
-            <CarouselItem
+              {projectsFavorites.map((project, projectIndex) => (
+                <CarouselItem
                   key={projectIndex}
                   className="md:basis-1/2 lg:basis-1/3"
                 >
@@ -217,12 +216,12 @@ export default function AboutPage() {
                     }}
                     className="h-full"
                   >
-              <ProjectCard
-                project={project}
-                cardClassName="bg-[#141b3d] border-[#fbbf24]/20 overflow-hidden h-full pt-0 hover:border-[#60a5fa]/50 transition-all duration-300 group"
-                imageClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  imageOverlayClassName="absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/40 to-transparent"
-                showFavoriteBadge
+                    <ProjectCard
+                      project={project}
+                      cardClassName="bg-[#141b3d] border-[#fbbf24]/20 overflow-hidden h-full pt-0 hover:border-[#60a5fa]/50 transition-all duration-300 group"
+                      imageClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      imageOverlayClassName="absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/40 to-transparent"
+                      showFavoriteBadge
                       showOverlayLinks
                       enableDescriptionToggle
                       descriptionMaxChars={400}
@@ -231,8 +230,8 @@ export default function AboutPage() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex 2xl:-left-24 lg:-left-16 md:-left-12 bg-[#141b3d] border-[#60a5fa]/30 text-[#60a5fa] hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24]" /                      >
-                        <CarouselNext className="hidden md:flex 2xl:-right-24 lg:-right-16 md:-right-12 bg-[#141b3d] border-[#60a5fa]/30 text-[#60a5fa] hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24]" />
+            <CarouselPrevious className="hidden md:flex 2xl:-left-24 lg:-left-16 md:-left-12 bg-[#141b3d] border-[#60a5fa]/30 text-[#60a5fa] hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24]" />
+            <CarouselNext className="hidden md:flex 2xl:-right-24 lg:-right-16 md:-right-12 bg-[#141b3d] border-[#60a5fa]/30 text-[#60a5fa] hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24]" />
 
             <div className="flex md:hidden justify-center mt-4 gap-4">
               <CarouselPrevious className="bg-[#141b3d] border-[#60a5fa]/30 text-[#60a5fa] hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24]" />

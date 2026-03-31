@@ -20,7 +20,7 @@ export default function Navbar() {
       color: "goldmenu",
     },
     {
-      label: "Qui-suis-je ?",
+      label: "Qui suis-je ?",
       href: "/about_me",
       color: "bluemenu",
     },
@@ -62,22 +62,25 @@ export default function Navbar() {
       className="py-5 fixed top-0 left-0 right-0 z-50 bg-accent/50 backdrop-blur-sm"
     >
       <nav className="max-h-8 md:max-h-14 bg-background ring-1 ring-secondary shadow-xl shadow-secondary/50 animate-nav rounded-full w-4/5 mx-auto px-3 lg:px-2 py-1 lg:py-2 flex items-center justify-between">
-        {/* Brand / title */}
+        {/* Brand / title ONLY on XL screens (desktop)*/}
         {isHome ? null : (
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-sm font-semibold text-foreground whitespace-nowrap">
+          <Link
+            href="/"
+            className="flex items-center rounded-full px-2 xl:px-6 py-1 xl:py-2.5 bg-gradient-to-r from-[#0f1640] to-[#141b3d] hover:shadow-lg hover:shadow-primary/40 xl:hover:-translate-y-0.5 transition-all duration-300"
+          >
+            <span className="text-base font-extrabold tracking-wide text-[#60a5fa] whitespace-nowrap text-center">
               {siteOwner.fullName}
             </span>
           </Link>
         )}
 
         {/* Desktop Navigation Items */}
-        <div className="hidden lg:flex flex-1 justify-center items-center gap-8">
+        <div className="hidden lg:flex flex-1 justify-evenly items-center gap-4 xl:gap-8">
           {menuItems.map((item) => (
             <Link
               href={item.href}
               key={item.href}
-              className={`${item.color} text-foreground text-lg transition-all duration-300 px-4 py-2 rounded-lg hover:scale-105 hover:shadow-lg`}
+              className={`${item.color} text-foreground text-md text-center transition-all duration-300 px-2 xl:px-4 py-2 rounded-lg hover:scale-105 hover:shadow-lg`}
             >
               {item.label}
             </Link>
