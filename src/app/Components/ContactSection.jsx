@@ -15,11 +15,11 @@ import { Tooltip } from "react-tooltip";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
-    firstName: "Bill",
-    lastName: "Gates",
-    email: "bill.gates@microsoft.com",
-    phone: "+33 6 12 34 56 78",
-    message: "Votre profil m'intéresse, je voudrais en savoir plus sur vos projets. Merci de me recontacter au + vite !!!",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);

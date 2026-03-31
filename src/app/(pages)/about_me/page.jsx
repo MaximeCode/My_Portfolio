@@ -218,6 +218,7 @@ export default function AboutPage() {
                   >
                     <ProjectCard
                       project={project}
+                      index={projectIndex}
                       cardClassName="bg-[#141b3d] border-[#fbbf24]/20 overflow-hidden h-full pt-0 hover:border-[#60a5fa]/50 transition-all duration-300 group"
                       imageClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       imageOverlayClassName="absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/40 to-transparent"

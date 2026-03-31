@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ExternalLink, Github, Star } from "lucide-react";
+import { ExternalLink, Github, Star, Lock } from "lucide-react";
 import {
   Card,
   CardHeader,
@@ -11,17 +11,17 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Tooltip } from 'react-tooltip'
 
 export default function ProjectCard({
   project,
+  index,
   cardClassName = "",
   imageClassName = "w-full h-full object-cover transition-transform duration-500",
   imageOverlayClassName = "absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/40 to-transparent",
   showFavoriteBadge = false,
-  showInProgressBadge = false,
   inProgressBadgeText = "EN COURS DE DÉVELOPPEMENT",
   showOverlayLinks = false,
-  titleAction = null,
   enableDescriptionToggle = false,
   descriptionMaxChars = 400,
 }) {
@@ -50,7 +50,7 @@ export default function ProjectCard({
           </span>
         )}
 
-        {showInProgressBadge && project.in_progress && (
+        {project.in_progress && (
           <Badge
             variant="outline"
             className="bg-[#60a5fa] text-white text-xs border-[#60a5fa] absolute top-3 right-3 z-10"
@@ -61,16 +61,6 @@ export default function ProjectCard({
 
         {showOverlayLinks && (
           <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            {project.link && (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-[#fbbf24] text-[#0a0e27] rounded-full hover:bg-[#60a5fa] transition-colors"
-              >
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            )}
             {project.github && (
               <a
                 href={project.github}
@@ -87,11 +77,24 @@ export default function ProjectCard({
 
       <CardHeader>
         <CardTitle
-          className={`text-[#f5e6d3] ${titleAction ? "flex items-center justify-between" : ""
-            }`}
-        >
+          className="text-[#f5e6d3] flex items-center justify-between">
           {project.title}
-          {titleAction}
+          {project.link ? (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer"
+            >
+              <ExternalLink className="w-5 h-5" data-tooltip-id={`tooltip_link_${index}`} data-tooltip-content="Voir le projet" />
+              <Tooltip id={`tooltip_link_${index}`} />
+            </a>
+          ) : (
+            <>
+              <Lock className="w-5 h-5 text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-not-allowed" data-tooltip-id={`tooltip_lock_${index}`} data-tooltip-content="Projet privé, non disponible en ligne." />
+              <Tooltip id={`tooltip_lock_${index}`} />
+            </>
+          )}
         </CardTitle>
 
         <CardDescription
