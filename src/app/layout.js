@@ -5,7 +5,8 @@ import Navbar from "@/app/Components/Navbar";
 import FooterMentionsLink from "@/app/Components/FooterMentionsLink";
 import PageTransition from "@/app/Components/PageTransition";
 import { assets } from "@/app/data/site.config";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const classNameForIcon = "w-5 h-5 group-hover:animate-bounce";
 export const ma_pdp = assets.avatarPath;
@@ -15,7 +16,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body className="min-h-screen bg-gradient-to-b from-background to-bg-accent relative">
+        {/* Analytics and Speed Insights for Vercel */}
         <Analytics />
+        <SpeedInsights />
+
         <Navbar />
         <PageTransition>{children}</PageTransition>
 
