@@ -74,7 +74,7 @@ export default function HeroSection() {
               </p>
             </div>
 
-            <div className="flex md:flex-row gap-4 md:gap-8">
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-8">
               {/* Voir mes réalisations */}
               <Btn
                 icon={<Eye className={classNameForIcon} />}
@@ -88,10 +88,6 @@ export default function HeroSection() {
           </div>
         </div>
       </section>
-
-      {/* Éléments décoratifs */}
-      <div className="fixed top-1/4 right-0 w-96 h-96 bg-[#fbbf24]/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
-      <div className="fixed bottom-1/4 left-0 w-96 h-96 bg-[#60a5fa]/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
     </>
   );
 }
