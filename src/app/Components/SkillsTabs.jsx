@@ -21,8 +21,9 @@ import {
   SiPostman,
   SiSwagger,
 } from "react-icons/si";
-import { Box, Languages, Monitor } from "lucide-react";
+import { Box, Monitor } from "lucide-react";
 import { FR, GB, ES } from "country-flag-icons/react/3x2";
+import Image from "next/image";
 
 const FLAG_ICONS = new Set(["fr", "gb", "es"]);
 
@@ -60,13 +61,13 @@ export default function SkillsTabs() {
     <>
       {/* Tabs Navigation */}
       <div className="bg-bg-accent/50 backdrop-blur-sm rounded-2xl p-2 border border-muted/30 shadow-2xl mt-12">
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {tabs.map((tab) => {
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex-1 min-w-[140px] flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-medium transition-all duration-300 ${activeTab === tab.id
+                className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-medium transition-all duration-300 ${activeTab === tab.id
                   ? "bg-secondary text-background shadow-lg shadow-secondary/50 scale-105"
                   : "text-foreground/70 hover:bg-muted/50 hover:text-foreground"
                   }`}
@@ -83,7 +84,7 @@ export default function SkillsTabs() {
       <div className="bg-bg-accent/30 backdrop-blur-sm rounded-2xl p-8 border border-muted/30 shadow-2xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {skills[activeTab].map((skill, index) => {
-            const SkillIcon = skill.icon ? skillIconMap[skill.icon] : null;
+            const SkillIcon = skill.icon && skill.icon != "sylius" ? skillIconMap[skill.icon] : null;
             return (
               <div
                 key={skill.name}
@@ -95,12 +96,17 @@ export default function SkillsTabs() {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-foreground group-hover:scale-110 transition-transform duration-300 ${FLAG_ICONS.has(skill.icon) ? 'bg-transparent' : 'bg-muted/50'}`}>
-                      {SkillIcon &&
+                      {SkillIcon ?
                         (FLAG_ICONS.has(skill.icon) ? (
                           <SkillIcon className="h-6 w-9" title={skill.name} />
                         ) : (
                           <SkillIcon size={24} />
-                        ))}
+                        )) : (
+                          <Image src="/img/logo/logo_sylius.png" alt="Sylius" className="h-7 w-10 object-center object-contain"
+                            width={24}
+                            height={24}
+                          />
+                        )}
                     </div>
                     <span className="text-foreground font-semibold text-lg">
                       {skill.name}

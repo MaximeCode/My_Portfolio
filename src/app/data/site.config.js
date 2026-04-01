@@ -20,7 +20,7 @@ export const contact = {
   phoneHref: "+33762171177",
   /** Phone as displayed (spaces allowed). */
   phoneDisplay: "07 62 17 11 77",
-  postalAddress: "À renseigner",
+  postalAddress: "3 rue des Minimes, Orléans (45)",
 };
 
 /** Social / external links. */
@@ -39,7 +39,7 @@ export const legal = {
 };
 
 /** Location string (about page, etc.). */
-export const location = "Orléans (45), Chartres (28) France";
+export const location = "Orléans (45), Chartres (28), France";
 
 /** Profile image paths (under /public). */
 export const assets = {

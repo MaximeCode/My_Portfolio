@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { mySocialMedias } from "@/app/data/contact.data";
-import { contact, social } from "@/app/data/site.config";
+import { contact, social, location } from "@/app/data/site.config";
 import {
   Building2,
   MapPin,
@@ -13,13 +13,33 @@ import {
 } from "lucide-react";
 import { Tooltip } from "react-tooltip";
 
+const ContactCard = ({ icon, title, color = "secondary", children }) => {
+  return (
+    <div className={`bg-bg-accent/40 backdrop-blur-sm rounded-2xl p-6 border border-muted/30 shadow-2xl hover:border-${color}/30 50-all duration-300 hover:scale-105 group`}>
+      <div className="flex items-center gap-4 mb-4">
+        <div className={`p-3 bg-${color}/10 rounded-xl group-hover:bg-${color}/20 transition-colors duration-300`}>
+          {React.cloneElement(icon, {
+            className: `w-6 h-6 text-${color}`,
+          })}
+        </div>
+        <h3 className="text-xl font-bold text-foreground">
+          {title}
+        </h3>
+      </div>
+      <div className="text-foreground/70 text-sm space-y-3">
+        {children}
+      </div>
+    </div>
+  );
+};
+
 export default function ContactSection() {
   const [formData, setFormData] = useState({
-    firstName: "Bill",
-    lastName: "Gates",
-    email: "bill.gates@microsoft.com",
-    phone: "+33 6 12 34 56 78",
-    message: "Votre profil m'intéresse, je voudrais en savoir plus sur vos projets. Merci de me recontacter au + vite !!!",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -99,6 +119,7 @@ export default function ContactSection() {
                 </button>
                 {/* Icône animée */}
                 <div className="relative mb-8 transition-colors duration-300">
+
                   <div className="w-24 h-24 rounded-full bg-secondary/10 flex items-center justify-center transition-colors duration-300">
                     <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center transition-colors duration-300">
                       <CheckCircle2 className="w-10 h-10 text-secondary transition-colors duration-300" />
@@ -289,52 +310,31 @@ export default function ContactSection() {
         </div>
 
         {/* Informations Contact */}
-        <div className="space-y-6 flex flex-col justify-between h-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6 justify-between h-full w-full max-w-sm md:max-w-3xl mx-auto">
           {/* Freelance */}
-          <div className="bg-bg-accent/40 backdrop-blur-sm rounded-2xl p-6 border border-muted/30 shadow-2xl hover:border-secondary/30 transition-all duration-300 hover:scale-105 group">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-secondary/10 rounded-xl group-hover:bg-secondary/20 transition-colors duration-300">
-                <Building2 className="w-6 h-6 text-secondary" />
-              </div>
-              <h3 className="text-xl font-bold text-foreground">
-                Statut professionnel
-              </h3>
-            </div>
-            <div className="text-foreground/70 space-y-2">
-              <p>Freelance</p>
-            </div>
-          </div>
+          <ContactCard
+            icon={<Building2 />}
+            title="Statut professionnel"
+            color="secondary"
+          >
+            Freelance
+          </ContactCard>
 
           {/* Localisation */}
-          <div className="bg-bg-accent/40 backdrop-blur-sm rounded-2xl p-6 border border-muted/30 shadow-2xl hover:border-secondary/30 transition-all duration-300 hover:scale-105 group">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors duration-300">
-                <MapPin className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="text-xl font-bold text-foreground">Localisation</h3>
-            </div>
-            <div className="text-foreground/70 space-y-1">
-              <ul>
-                <li>Orléans (45)</li>
-                <li>Chartres (28)</li>
-                <li>France</li>
-              </ul>
-            </div>
-          </div>
+          <ContactCard
+            icon={<MapPin />}
+            title="Localisation"
+            color="primary"
+          >
+            <p>{location}</p>
+          </ContactCard>
 
           {/* Téléphone */}
-          <div className="bg-bg-accent/40 backdrop-blur-sm rounded-2xl p-6 border border-muted/30 shadow-2xl hover:border-secondary/30 transition-all duration-300 hover:scale-105 group">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-secondary/10 rounded-xl group-hover:bg-secondary/20 transition-colors duration-300">
-                <Phone className="w-6 h-6 text-secondary" />
-              </div>
-              <h3 className="text-xl font-bold text-foreground">
-                Appelez-moi
-              </h3>
-            </div>
-            <p className="text-foreground/70 mb-3">
-              Contactez-moi pour échanger. Je suis toujours disponible pour vous aider.
-            </p>
+          <ContactCard
+            icon={<Phone />}
+            title="Appelez-moi"
+            color="secondary"
+          >
             <a
               className="text-primary text-lg font-semibold hover:text-secondary transition-colors duration-300"
               href={`tel:${contact.phoneHref}`}
@@ -343,8 +343,31 @@ export default function ContactSection() {
             >
               {contact.phoneDisplay}
             </a>
+            <p className="mt-1">
+              Contactez-moi pour échanger. Je suis toujours disponible pour vous aider.
+            </p>
             <Tooltip id="tooltip_phone" />
-          </div>
+          </ContactCard>
+
+
+          {/* Mail */}
+          <ContactCard
+            icon={<Mail />}
+            title="Email"
+            color="primary"
+          >
+            <p
+              className="text-primary text-lg font-semibold hover:text-secondary transition-colors duration-300"
+              data-tooltip-id="tooltip_email"
+              data-tooltip-content="Copier dans le presse-papiers"
+            >
+              {contact.email}
+            </p>
+            <p className="mt-1">
+              Envoyez-moi un email. Je vous répondrai dans les plus brefs délais.
+            </p>
+            <Tooltip id="tooltip_email" />
+          </ContactCard>
         </div>
       </div>
 

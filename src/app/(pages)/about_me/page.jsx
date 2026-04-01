@@ -1,28 +1,24 @@
 "use client";
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
-import {
   Eye,
-  ExternalLink,
-  Lock,
   MailPlus,
 } from "lucide-react";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import BtnDownloadCV from "@/app/Components/Front/BtnDownloadCV";
 import Btn from "@/app/Components/Front/Btn";
+import ProjectsCarousel from "@/app/Components/ProjectsCarousel";
 import { classNameForIcon } from "@/app/layout";
 import Title from "@/app/Components/Front/Title";
 import Base from "@/app/Components/Front/Base";
+import { motion } from "motion/react";
 
-import { personalInfo, education } from "@/app/data/qui_suis_je.data";
+import {
+  aboutMeIntro,
+  aboutMeParagraphs,
+  personalInfo,
+  education,
+} from "@/app/data/qui_suis_je.data";
 import { projectsByTechnology } from "@/app/data/projects.data";
 
 import 'react-tooltip/dist/react-tooltip.css'
@@ -60,78 +56,96 @@ export default function AboutPage() {
 
   return (
     <Base>
+      <Title className="block xl:hidden" text="Qui suis-je ?" />
       {/* Two Columns Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
-        {/* Description Column */}
-        <div className="lg:col-span-2 text-justify">
-          <Title text="Qui suis-je ?" />
-          <p className="text-[#f5e6d3] mb-4 text-lg">
-            Passionné par le développement web depuis plus de 5 ans, j&apos;ai
-            eu l&apos;opportunité de travailler sur de nombreux projets variés,
-            allant de sites vitrines élégants à des applications web complexes
-            en passant par des sites e-commerce. Mon approche combine créativité
-            et rigueur technique pour offrir des solutions performantes et
-            esthétiques.
-          </p>
-          <p className="text-[#f5e6d3] mb-4 text-lg">
-            Je me spécialise dans le développement front-end avec React et
-            Next.JS, tout en maîtrisant également le back-end avec Node.js. Mon
-            objectif est toujours de créer des expériences utilisateur fluides
-            et intuitives qui répondent aux besoins réels des utilisateurs.
-          </p>
-          <p className="text-[#f5e6d3] text-lg">
-            Curieux de nature, je me tiens constamment à jour des dernières
-            technologies et tendances du web. J&apos;aime relever de nouveaux
-            défis et collaborer avec des équipes dynamiques pour transformer des
-            idées en produits concrets et impactants.
-          </p>
+      <div className="mb-20 relative">
+        <div className="flex flex-col md:flex-row gap-12 lg:gap-6 items-start mb-10">
+          {/* Description */}
+          <div className="flex-1 min-w-0 text-justify">
+            <Title className="hidden xl:block" text="Qui suis-je ?" />
+            <div className="flex flex-col gap-4">
+              <p className="text-[#60a5fa]/75 text-md xl:text-lg italic">
+                {aboutMeIntro}
+              </p>
+              {aboutMeParagraphs.map((paragraph, index) => (
+                <p key={index} className="text-[#f5e6d3] text-md xl:text-lg">
+                  {/* Split aoute du style aux textes entre parenthèses */}
+                  {paragraph.split(/(\([^)]+\))/g).map((segment, i) =>
+                    segment.match(/^\(.*\)$/) ? (
+                      <span
+                        key={i}
+                        className="italic text-[#f5e6d3]/60 text-sm xl:text-base"
+                      >
+                        {segment}
+                      </span>
+                    ) : (
+                      <Fragment key={i}>
+                        {segment}
+                      </Fragment>
+                    )
+                  )}
+                </p>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Info */}
+          <div className="sticky top-32 shrink-0 w-fit max-w-md mx-auto md:mx-0 bg-[#141b3d] rounded-lg p-4 lg:p-6 border border-[#fbbf24]/20 h-fit">
+            <h3 className="text-2xl font-semibold text-[#fbbf24] mb-6 text-center">
+              Informations
+            </h3>
+            <div className="space-y-4">
+              {personalInfo.map((info, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <info.icon className="w-6 h-6 text-[#60a5fa] flex-shrink-0 mt-1" />
+                  <div className="flex-1">
+                    <p className="text-[#f5e6d3]/60 text-sm">{info.label}</p>
+                    {info.link ? (
+                      <a
+                        href={info.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors text-sm break-all"
+                      >
+                        {info.value}
+                      </a>
+                    ) : (
+                      <>
+                        <p className="text-[#f5e6d3] text-sm">
+                          <span
+                            className={`
+                          ${(info.value.includes("@") ||
+                                info.value.includes("+33")) &&
+                              "hover:text-[#fbbf24] transition-colors cursor-pointer"
+                              }
+                          `}
+                            {...((info.value.includes("@") || info.value.includes("+33")) && {
+                              "data-tooltip-id": `tooltip_infos_${index}`,
+                              "data-tooltip-content": "Copier dans le presse-papiers"
+                            })}
+                          >
+                            {info.value}
+                          </span>
+                        </p>
+                        <Tooltip id={`tooltip_infos_${index}`} />
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
 
-        {/* Quick Info Column */}
-        <div className="bg-[#141b3d] rounded-lg p-6 border border-[#fbbf24]/20 h-fit">
-          <h3 className="text-2xl font-semibold text-[#fbbf24] mb-6 text-center">
-            Informations
-          </h3>
-          <div className="space-y-4">
-            {personalInfo.map((info, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <info.icon className="w-6 h-6 text-[#60a5fa] flex-shrink-0 mt-1" />
-                <div className="flex-1">
-                  <p className="text-[#f5e6d3]/60 text-sm">{info.label}</p>
-                  {info.link ? (
-                    <a
-                      href={info.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors text-sm break-all"
-                    >
-                      {info.value}
-                    </a>
-                  ) : (
-                    <>
-                      <p className="text-[#f5e6d3] text-sm">
-                        <span
-                          className={`
-                          ${(info.value.includes("@") ||
-                              info.value.includes("+33")) &&
-                            "hover:text-[#fbbf24] transition-colors cursor-pointer"
-                            }
-                          `}
-                          {...((info.value.includes("@") || info.value.includes("+33")) && {
-                            "data-tooltip-id": `tooltip_infos_${index}`,
-                            "data-tooltip-content": "Copier dans le presse-papiers"
-                          })}
-                        >
-                          {info.value}
-                        </span>
-                      </p>
-                      <Tooltip id={`tooltip_infos_${index}`} />
-                    </>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* CTA to Skills page */}
+        <div className="flex justify-center">
+          <Btn
+            icon={<Eye className={classNameForIcon} />}
+            text="Voir toutes mes compétences"
+            href="/my_skills"
+            size="md"
+          />
         </div>
       </div>
 
@@ -142,7 +156,7 @@ export default function AboutPage() {
         </h2>
 
         {/* Timeline Navigation */}
-        <div className="flex justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           {Object.keys(educationRefs)
             .reverse()
             .map((year) => (
@@ -150,7 +164,7 @@ export default function AboutPage() {
                 type="button"
                 key={year}
                 onClick={() => scrollToEducation(year)}
-                className="cursor-pointer px-6 py-2 bg-[#141b3d] border border-[#60a5fa]/30 text-[#60a5fa] rounded-full hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24] transition-all duration-300"
+                className="cursor-pointer shrink-0 px-6 py-2 bg-[#141b3d] border border-[#60a5fa]/30 text-[#60a5fa] rounded-full hover:bg-[#60a5fa]/10 hover:border-[#fbbf24] hover:text-[#fbbf24] transition-all duration-300"
               >
                 {year}
               </button>
@@ -160,25 +174,25 @@ export default function AboutPage() {
         {/* Timeline */}
         <div className="relative max-w-6xl mx-auto">
           {/* Vertical Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 mx-auto bg-gradient-to-b from-[#60a5fa] via-[#fbbf24] to-[#60a5fa]" />
+          <div className="absolute right-4 lg:right-auto lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#60a5fa] via-[#fbbf24] to-[#60a5fa]" />
 
           {education.map((edu, index) => (
             <div
               key={index}
               ref={educationRefs[edu.year]}
-              className={`relative mb-12 md:mb-16 ${index % 2 === 0
-                ? "pr-12 mr-auto text-right"
-                : "pl-12 ml-auto text-left"
-                } w-1/2`}
+              className={`relative mb-12 md:mb-16 w-full pr-10 text-left ${index % 2 === 0
+                ? "lg:w-1/2 lg:pr-12 lg:mr-auto lg:text-right"
+                : "lg:w-1/2 lg:pl-12 lg:pr-0 lg:ml-auto lg:text-left"
+                }`}
             >
               {/* Timeline Dot */}
               <div
-                className={`absolute top-0 w-4 h-4 bg-[#fbbf24] rounded-full border-4 border-[#0a0e27] ${index % 2 === 0 ? "-right-2" : "-left-2"
+                className={`absolute top-0 right-[0.5rem] w-4 h-4 bg-[#fbbf24] rounded-full border-4 border-[#0a0e27] ${index % 2 === 0 ? "lg:-right-2" : "lg:-left-2"
                   }`}
               />
 
               {/* Content Card */}
-              <div className="bg-[#141b3d] p-6 rounded-lg border border-[#60a5fa]/20 hover:border-[#fbbf24]/50 transition-all duration-300">
+              <div className="bg-[#141b3d] p-3 md:p-6 rounded-lg border border-[#60a5fa]/20 hover:border-[#fbbf24]/50 transition-all duration-300">
                 <div className="inline-block px-4 py-1 bg-[#fbbf24]/20 text-[#fbbf24] rounded-full mb-4">
                   {edu.year}
                 </div>
@@ -186,7 +200,7 @@ export default function AboutPage() {
                   {edu.degree}
                 </h3>
                 <p className="text-[#60a5fa] mb-3">{edu.school}</p>
-                <p className="text-[#f5e6d3]/70 text-justify">
+                <p className="text-[#f5e6d3]/70 text-justify text-sm md:text-base">
                   {edu.description}
                 </p>
               </div>
@@ -200,69 +214,13 @@ export default function AboutPage() {
         <h2 className="text-4xl font-bold text-[#fbbf24] mb-8 text-center">
           Mes Projets Favoris
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projectsFavorites.map((project, index) => (
-            <div key={index}>
-              <Card className="pt-0 bg-[#141b3d] border-[#fbbf24]/20 overflow-hidden h-full hover:border-[#60a5fa]/50 transition-all duration-300">
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={`/img/${project.image}.png`}
-                    alt={project.title}
-                    width={1080}
-                    height={500}
-                    className={`w-full h-full ${project.object_classes || "object-top object-cover"} transition-transform duration-500 hover:scale-110`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#141b3d] via-[#141b3d]/20 to-transparent"></div>
-                  {project.in_progress && (
-                    <Badge
-                      variant="outline"
-                      className="bg-[#60a5fa] text-white text-xs border-[#60a5fa] absolute top-3 right-3 z-10"
-                    >
-                      EN COURS DE D&Eacute;VELOPPEMENT
-                    </Badge>
-                  )}
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-[#f5e6d3] flex items-center justify-between">
-                    {project.title}
-                    {project.link ? (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer"
-                      >
-                        <ExternalLink className="w-5 h-5" data-tooltip-id={`tooltip_link_${index}`} data-tooltip-content="Voir le projet" />
-                        <Tooltip id={`tooltip_link_${index}`} />
-                      </a>
-                    ) : (
-                      <>
-                        <Lock className="w-5 h-5 text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-not-allowed" data-tooltip-id={`tooltip_lock_${index}`} data-tooltip-content="Projet privé, non disponible en ligne." />
-                        <Tooltip id={`tooltip_lock_${index}`} />
-                      </>
-                    )}
-                  </CardTitle>
-                  <CardDescription className="text-[#f5e6d3]/70">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, techIndex) => (
-                      <Badge
-                        key={techIndex}
-                        variant="outline"
-                        className="bg-[#fbbf24]/10 text-[#fbbf24] border-[#fbbf24]/30"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <ProjectsCarousel projects={projectsFavorites} />
+        </motion.div>
 
         <div className="flex justify-center mt-12">
           <Btn

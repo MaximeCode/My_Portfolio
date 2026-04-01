@@ -27,18 +27,17 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="container mx-auto px-6 py-20 min-h-screen flex items-center">
-        <div className="w-full flex flex-col lg:flex-row gap-16 items-center">
+      <section className="container mx-auto px-4 md:px-6 py-20 min-h-screen flex items-center">
+        <div className="w-full flex flex-col lg:flex-row gap-8 md:gap-16 items-center">
           <LeftColumn />
           {/* Right Side - Introduction (2/3 width) */}
           <div className="lg:w-2/3 flex flex-col gap-8">
             {/* Name - Animated */}
-            <h1 className="text-[#fbbf24] text-6xl tracking-wide animate-slide-in-right">
+            <h1 className="text-[#fbbf24] text-4xl lg:text-6xl tracking-wide animate-slide-in-right">
               {displayText}
               <span
-                className={`animate-pulse ${
-                  displayCursor ? "inline-block" : "hidden"
-                }`}
+                className={`animate-pulse ${displayCursor ? "inline-block" : "hidden"
+                  }`}
               >
                 |
               </span>
@@ -46,11 +45,11 @@ export default function HeroSection() {
 
             {/* Job Title - Very Big Style with Animation */}
             <div className="relative animate-slide-in-left">
-              <h2 className="mb-4 text-7xl text-[#f5e6d3] tracking-tight leading-none">
+              <h2 className="mb-4 text-5xl lg:text-7xl text-[#f5e6d3] tracking-tight leading-none">
                 Développeur
               </h2>
               <div className="relative inline-block">
-                <div className="text-5xl lg:text-6xl font-bold">
+                <div className="text-4xl lg:text-6xl font-bold">
                   <TextType
                     text={["Web", "Front-End", "Back-End", "Full-Stack"]}
                     typingSpeed={100}
@@ -68,22 +67,23 @@ export default function HeroSection() {
 
             {/* Description */}
             <div className="text-[#f5e6d3]/70 space-y-4 animate-fade-in">
-              <p className="text-xl leading-relaxed">
+              <p className="text-lg md:text-xl leading-relaxed">
                 Mon objectif est de créer des solutions applicatives aux
                 entreprises mais aussi aux particuliers pour résoudre des
                 besoins.
               </p>
             </div>
 
-            <div className="flex gap-8">
+            <div className="flex md:flex-row gap-4 md:gap-8">
               {/* Voir mes réalisations */}
               <Btn
                 icon={<Eye className={classNameForIcon} />}
                 text="Voir mes réalisations"
                 href="/my_projects"
+                size="md"
               />
 
-              <BtnDownloadCV />
+              <BtnDownloadCV size="md" />
             </div>
           </div>
         </div>

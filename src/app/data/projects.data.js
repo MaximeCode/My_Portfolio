@@ -15,18 +15,18 @@ export const projectsByTechnology = [
                 github: "https://github.com/MaximeCode/alba_badminton",
                 fav: true,
             },
-            // {
-            //     title: "Site vitrine pour le club de badminton d'Orléans (45)",
-            //     description:
-            //         "Refonte fonctionnelle et visuelle du site vitrine du club de badminton d'Orléans (45) dont je suis adhérent.",
-            //     technologies: [],
-            //     image: "Logo_CLTO",
-            //     link: "",
-            //     github: "",
-            //     fav: true,
-            //     in_progress: true,
-            //     object_classes: "object-center object-contain"
-            // },
+            {
+                title: "Site vitrine pour le club de badminton d'Orléans (45)",
+                description:
+                    "Refonte fonctionnelle et visuelle du site vitrine du club de badminton d'Orléans (45) dont je suis adhérent.",
+                technologies: [],
+                image: "Logo_CLTO",
+                link: "",
+                github: "",
+                fav: true,
+                in_progress: true,
+                object_classes: "object-center object-contain"
+            },
         ],
     },
     {

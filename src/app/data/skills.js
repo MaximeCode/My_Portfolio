@@ -5,7 +5,7 @@ export const skills = {
     { name: "React", level: 75, icon: "react" },
     { name: "Next.js", level: 75, icon: "nextjs" },
     { name: "TailwindCSS", level: 90, icon: "tailwindcss" },
-    { name: "Bootstrap", level: 90, icon: "bootstrap" },
+    { name: "Bootstrap", level: 85, icon: "bootstrap" },
     { name: "JavaScript", level: 80, icon: "javascript" },
     { name: "HTML", level: 95, icon: "html5" },
     { name: "CSS", level: 95, icon: "css3" },
@@ -16,11 +16,12 @@ export const skills = {
     { name: "Node.js", level: 75, icon: "nodejs" },
     { name: "NPM", level: 70, icon: "npm" },
     { name: "SQL (MySQL, SQLite)", level: 90, icon: "mysql" },
-    { name: "PHP", level: 80, icon: "php" },
-    { name: "Symfony", level: 70, icon: "symfony" },
+    { name: "PHP", level: 85, icon: "php" },
+    { name: "Symfony", level: 80, icon: "symfony" },
     { name: "POO (Programmation Orientée Objet)", level: 80, icon: "poo" },
     { name: "API REST", level: 80, icon: "apirest" },
     { name: "WordPress", level: 70, icon: "wordpress" },
+    { name: "Sylius", level: 70, img: "logo_sylius" }, // icon on public/img/logo_sylius.png
   ],
   tools: [
     { name: "Git/GitHub", level: 90, icon: "github" },
