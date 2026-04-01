@@ -4,7 +4,7 @@ import {
   Eye,
   MailPlus,
 } from "lucide-react";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import BtnDownloadCV from "@/app/Components/Front/BtnDownloadCV";
 import Btn from "@/app/Components/Front/Btn";
 import ProjectsCarousel from "@/app/Components/ProjectsCarousel";
@@ -14,6 +14,7 @@ import Base from "@/app/Components/Front/Base";
 import { motion } from "motion/react";
 
 import {
+  aboutMeIntro,
   aboutMeParagraphs,
   personalInfo,
   education,
@@ -55,66 +56,96 @@ export default function AboutPage() {
 
   return (
     <Base>
-      <Title className="block lg:hidden" text="Qui suis-je ?" />
+      <Title className="block xl:hidden" text="Qui suis-je ?" />
       {/* Two Columns Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-14 md:gap-8 mb-20">
-        {/* Description Column */}
-        <div className="xl:col-span-2 text-justify">
-          <Title className="hidden lg:block" text="Qui suis-je ?" />
-          <div className="flex flex-col gap-4">
-            {aboutMeParagraphs.map((paragraph, index) => (
-              <p key={index} className="text-[#f5e6d3] lg:text-lg">
-                {paragraph}
+      <div className="mb-20 relative">
+        <div className="flex flex-col md:flex-row gap-12 lg:gap-6 items-start mb-10">
+          {/* Description */}
+          <div className="flex-1 min-w-0 text-justify">
+            <Title className="hidden xl:block" text="Qui suis-je ?" />
+            <div className="flex flex-col gap-4">
+              <p className="text-[#60a5fa]/75 text-md xl:text-lg italic">
+                {aboutMeIntro}
               </p>
-            ))}
+              {aboutMeParagraphs.map((paragraph, index) => (
+                <p key={index} className="text-[#f5e6d3] text-md xl:text-lg">
+                  {/* Split aoute du style aux textes entre parenthèses */}
+                  {paragraph.split(/(\([^)]+\))/g).map((segment, i) =>
+                    segment.match(/^\(.*\)$/) ? (
+                      <span
+                        key={i}
+                        className="italic text-[#f5e6d3]/60 text-sm xl:text-base"
+                      >
+                        {segment}
+                      </span>
+                    ) : (
+                      <Fragment key={i}>
+                        {segment}
+                      </Fragment>
+                    )
+                  )}
+                </p>
+              ))}
+            </div>
           </div>
+
+          {/* Quick Info */}
+          <div className="sticky top-32 shrink-0 w-fit max-w-md mx-auto md:mx-0 bg-[#141b3d] rounded-lg p-4 lg:p-6 border border-[#fbbf24]/20 h-fit">
+            <h3 className="text-2xl font-semibold text-[#fbbf24] mb-6 text-center">
+              Informations
+            </h3>
+            <div className="space-y-4">
+              {personalInfo.map((info, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <info.icon className="w-6 h-6 text-[#60a5fa] flex-shrink-0 mt-1" />
+                  <div className="flex-1">
+                    <p className="text-[#f5e6d3]/60 text-sm">{info.label}</p>
+                    {info.link ? (
+                      <a
+                        href={info.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors text-sm break-all"
+                      >
+                        {info.value}
+                      </a>
+                    ) : (
+                      <>
+                        <p className="text-[#f5e6d3] text-sm">
+                          <span
+                            className={`
+                          ${(info.value.includes("@") ||
+                                info.value.includes("+33")) &&
+                              "hover:text-[#fbbf24] transition-colors cursor-pointer"
+                              }
+                          `}
+                            {...((info.value.includes("@") || info.value.includes("+33")) && {
+                              "data-tooltip-id": `tooltip_infos_${index}`,
+                              "data-tooltip-content": "Copier dans le presse-papiers"
+                            })}
+                          >
+                            {info.value}
+                          </span>
+                        </p>
+                        <Tooltip id={`tooltip_infos_${index}`} />
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
 
-        {/* Quick Info Column */}
-        <div className="w-full max-w-md mx-auto bg-[#141b3d] rounded-lg p-4 lg:p-6 border border-[#fbbf24]/20 h-fit my-auto">
-          <h3 className="text-2xl font-semibold text-[#fbbf24] mb-6 text-center">
-            Informations
-          </h3>
-          <div className="space-y-4">
-            {personalInfo.map((info, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <info.icon className="w-6 h-6 text-[#60a5fa] flex-shrink-0 mt-1" />
-                <div className="flex-1">
-                  <p className="text-[#f5e6d3]/60 text-sm">{info.label}</p>
-                  {info.link ? (
-                    <a
-                      href={info.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors text-sm break-all"
-                    >
-                      {info.value}
-                    </a>
-                  ) : (
-                    <>
-                      <p className="text-[#f5e6d3] text-sm">
-                        <span
-                          className={`
-                          ${(info.value.includes("@") ||
-                              info.value.includes("+33")) &&
-                            "hover:text-[#fbbf24] transition-colors cursor-pointer"
-                            }
-                          `}
-                          {...((info.value.includes("@") || info.value.includes("+33")) && {
-                            "data-tooltip-id": `tooltip_infos_${index}`,
-                            "data-tooltip-content": "Copier dans le presse-papiers"
-                          })}
-                        >
-                          {info.value}
-                        </span>
-                      </p>
-                      <Tooltip id={`tooltip_infos_${index}`} />
-                    </>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* CTA to Skills page */}
+        <div className="flex justify-center">
+          <Btn
+            icon={<Eye className={classNameForIcon} />}
+            text="Voir toutes mes compétences"
+            href="/my_skills"
+            size="md"
+          />
         </div>
       </div>
 
@@ -156,7 +187,7 @@ export default function AboutPage() {
             >
               {/* Timeline Dot */}
               <div
-                className={`absolute top-0 right-[0.5rem] lg:right-auto w-4 h-4 bg-[#fbbf24] rounded-full border-4 border-[#0a0e27] ${index % 2 === 0 ? "xl:-right-2" : "xl:-left-2"
+                className={`absolute top-0 right-[0.5rem] w-4 h-4 bg-[#fbbf24] rounded-full border-4 border-[#0a0e27] ${index % 2 === 0 ? "lg:-right-2" : "lg:-left-2"
                   }`}
               />
 

@@ -45,7 +45,6 @@ export default function ProjectsCarousel({
                 showFavoriteBadge
                 showOverlayLinks
                 enableDescriptionToggle
-                descriptionMaxChars={400}
               />
             </motion.div>
           </CarouselItem>

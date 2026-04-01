@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { ExternalLink, Github, Star, Lock } from "lucide-react";
 import {
@@ -23,14 +23,20 @@ export default function ProjectCard({
   inProgressBadgeText = "EN COURS DE DÉVELOPPEMENT",
   showOverlayLinks = false,
   enableDescriptionToggle = false,
-  descriptionMaxChars = 400,
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const isLongDescription = project.description.length > descriptionMaxChars;
-  const canToggle = enableDescriptionToggle && isLongDescription;
-  const descriptionPreview = canToggle
-    ? `${project.description.slice(0, descriptionMaxChars)}...`
-    : project.description;
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const descriptionRef = useRef(null);
+
+  useEffect(() => {
+    if (descriptionRef.current) {
+      setIsOverflowing(
+        descriptionRef.current.scrollHeight > descriptionRef.current.clientHeight
+      );
+    }
+  }, []);
+
+  const canToggle = enableDescriptionToggle && isOverflowing;
 
   return (
     <Card className={cardClassName}>
@@ -79,29 +85,33 @@ export default function ProjectCard({
         <CardTitle
           className="text-[#f5e6d3] flex items-center justify-between">
           {project.title}
-          {project.link ? (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer"
-            >
-              <ExternalLink className="w-5 h-5" data-tooltip-id={`tooltip_link_${index}`} data-tooltip-content="Voir le projet" />
-              <Tooltip id={`tooltip_link_${index}`} />
-            </a>
-          ) : (
-            <>
-              <Lock className="w-5 h-5 text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-not-allowed" data-tooltip-id={`tooltip_lock_${index}`} data-tooltip-content="Projet privé, non disponible en ligne." />
-              <Tooltip id={`tooltip_lock_${index}`} />
-            </>
-          )}
+          <div className="basis-auto">
+            {project.link ? (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-pointer"
+              >
+                <ExternalLink className="w-5 h-5" data-tooltip-id={`tooltip_link_${index}`} data-tooltip-content="Voir le projet" />
+                <Tooltip id={`tooltip_link_${index}`} />
+              </a>
+            ) : (
+              <>
+                <Lock className="w-5 h-5 text-[#60a5fa] hover:text-[#fbbf24] transition-colors cursor-not-allowed" data-tooltip-id={`tooltip_lock_${index}`} data-tooltip-content="Projet privé, non disponible en ligne." />
+                <Tooltip id={`tooltip_lock_${index}`} />
+              </>
+            )}
+          </div>
         </CardTitle>
 
         <CardDescription
-          className={`relative text-[#f5e6d3]/70 ${canToggle ? "cursor-pointer" : ""}`}
+          ref={descriptionRef}
           onClick={() => canToggle && setIsExpanded((prev) => !prev)}
+          style={{ maxHeight: isExpanded ? "2000px" : "200px" }}
+          className={`relative text-[#f5e6d3]/70 overflow-hidden transition-[max-height] duration-300 ease-in-out ${canToggle ? "cursor-pointer" : ""}`}
         >
-          {!isExpanded ? descriptionPreview : project.description}
+          {project.description}
           {!isExpanded && canToggle && (
             <span className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#141b3d] to-transparent" />
           )}
