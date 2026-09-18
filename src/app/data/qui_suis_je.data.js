@@ -46,14 +46,14 @@ export const education = [
         degree: "Master Architecture & Développement Logiciel",
         school: "CODA_ School, Orléans (45)",
         description:
-            "J'ai pour projet de devenir chef de projet web et pour cela, je prévois de poursuivre mes études vers un master orienté architecture logicielle, gestion de projet et cybersécurité.",
+            "J'ai pour projet de devenir chef de projet / Lead développeur full-stack et pour cela, je poursuis mes études en Master Architecture & Développement Logiciel. Activités principales : Architecture logicielle, DevOps, CI/CD, Cybersécurité, Gestion de projet...",
     },
     {
         year: "2026",
         degree: "3ème année Bachelor Développeur Full-Stack",
         school: "CODA_ School, Orléans (45)",
         description:
-            "En alternance chez Kiwik, avec un rythme de 3 semaines en entreprise et 1 semaine en école. Formation en Développement Web Full-Stack grâce à des intervenants expérimentés et des projets variés. Activités principales : Approfondissement de React, Node.JS, Diagrammes UML, API REST, Docker, Symfony... Passage du diplôme en juin 2026.",
+            "En alternance chez Kiwik, avec un rythme de 3 semaines en entreprise et 1 semaine en école. Formation en Développement Web Full-Stack grâce à des intervenants expérimentés et des projets variés. Activités principales : Approfondissement de React, Node.JS, Diagrammes UML, API REST, Docker, Symfony... Diplôme obtenu en juin 2026.",
     },
     {
         year: "2025",
