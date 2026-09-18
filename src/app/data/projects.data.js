@@ -18,13 +18,13 @@ export const projectsByTechnology = [
             {
                 title: "Site vitrine pour le club de badminton d'Orléans (45)",
                 description:
-                    "Refonte fonctionnelle et visuelle du site vitrine du club de badminton d'Orléans (45) dont je suis adhérent.",
-                technologies: [],
+                    "Refonte fonctionnelle et visuelle du site vitrine du club de badminton d'Orléans (45) dont je suis adhérent. Utilisation de Strapi pour la gestion du contenu (CMS) et de Vite, React, TypeScript, TailwindCSS pour le développement du site. J'héberge moi-même le site sur mon VPS chez OVH, je gère le DNS, le SSL, ainsi que la base de données MySQL. L'app, le reverse-proxy et la DB sont conteneurisés avec Docker.",
+                technologies: ["Strapi", "Vite", "React", "TypeScript", "TailwindCSS", "MySQL"],
                 image: "Logo_CLTO",
-                link: "",
-                github: "",
+                link: "https://cltobadminton.fr",
+                github: "https://github.com/MaximeCode/CLTO_Badminton",
                 fav: true,
-                in_progress: true,
+                in_progress: false,
                 object_classes: "object-center object-contain"
             },
         ],
